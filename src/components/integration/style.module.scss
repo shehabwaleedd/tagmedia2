@@ -1,0 +1,43 @@
+.integration {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 10vh 0;
+    max-width: 90vw;
+    margin: auto;
+    h2 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--title-color);
+        text-transform: uppercase;
+        letter-spacing: 0.05rem;
+        position: relative;
+        text-align: center;
+        margin-bottom: 2rem;
+        @media (max-width: 768px) {
+            font-size: 1.6rem;
+        }
+    }
+    p {
+        font-size: 1.24rem;
+        font-weight: 400;
+        color: var(--text-color);
+        text-align: center;
+        margin-bottom: 2rem;
+        @media (max-width: 768px) {
+            color: var(--title-color);
+        }
+    }
+    &__container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
+    }
+}

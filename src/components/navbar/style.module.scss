@@ -1,0 +1,42 @@
+.navbar {
+    background-color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+
+    &__container {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 90vw;
+        margin: auto;
+        ul {
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+            align-items: center;
+            list-style: none;
+            gap: 0.5rem;
+
+            li {
+                a {
+                    text-decoration: none;
+                    color: var(--container-color);
+                    font-size: var(--body-font-size);
+
+                    &:hover {
+                        color: var(--second-accent-color);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.activeLink {
+
+    color: var(--second-accent-color);
+
+}
