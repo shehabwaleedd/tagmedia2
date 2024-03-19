@@ -1,5 +1,3 @@
-import Image from "next/image";
-import styles from "./page.module.scss";
 import Landing from "@/components/landing";
 import ServicesHomePage from "@/components/serviceHome";
 import NewsHomePage from "@/components/news";
