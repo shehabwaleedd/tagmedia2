@@ -28,13 +28,15 @@ const page = () => {
                     </div>
                     <div className={styles.about__story__container_right}>
                         <div className={styles.about__story__container_right_top}>
-                            <span> | </span>
-                            <h2>Our Story</h2>
-                        </div>
-                        <div className={styles.about__story__container_right_middle}>
-                            <p>We began our work in Egypt in 2011 by managing the accounts of Egyptian public figures and celebrities, beginning with Hany Shaker, Jomana Murad. </p>
-                            <p>Media production on the programme “Thoughts And Attitudes in the Life of Hani Shaker” beginning in 2020. As well as the creation of a collection of songs such as “Sha’abha Jaish”, “Momken ntaaraf” and “Zay Zaman”.</p>
-                            <p>In addition, beginning in 2021, we collaborated  with Al-Sabah Art Production company in Egypt on e-marketing and content creation</p>
+                            <div style={{ display: "flex", gap: "1rem" }}>
+                                <span> | </span>
+                                <h2>Our Story</h2>
+                            </div>
+                            <div className={styles.about__story__container_right_middle}>
+                                <p>We began our work in Egypt in 2011 by managing the accounts of Egyptian public figures and celebrities, beginning with Hany Shaker, Jomana Murad. </p>
+                                <p>Media production on the programme “Thoughts And Attitudes in the Life of Hani Shaker” beginning in 2020. As well as the creation of a collection of songs such as “Sha’abha Jaish”, “Momken ntaaraf” and “Zay Zaman”.</p>
+                                <p>In addition, beginning in 2021, we collaborated  with Al-Sabah Art Production company in Egypt on e-marketing and content creation</p>
+                            </div>
                         </div>
                         <div className={styles.about__story__container_right_lower}>
                             <a href="/contact">Start your work</a>
@@ -43,6 +45,7 @@ const page = () => {
                 </div>
                 <OurTeam />
             </section>
+
         </main>
     )
 }
