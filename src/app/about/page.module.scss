@@ -2,12 +2,18 @@
     padding-top: 10vh;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     min-height: 100vh;
     background-color: var(--container-color);
     width: 100%;
     gap: 10vh;
+
+    @media (max-width: 756px) {
+        padding: 10vh 0;
+        position: relative;
+        top: 10vh;
+    }
 
     &__container {
         display: flex;
@@ -111,6 +117,10 @@
             margin: 0 auto;
             margin-top: 2rem;
 
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+            }
+
             &_right {
                 display: flex;
                 flex-direction: column;
@@ -118,12 +128,23 @@
                 align-items: flex-start;
                 height: 100%;
                 width: 100%;
-                h2 {
-                    font-size: 1.5rem;
-                    font-weight: 700;
-                    color: var(--title-color);
-                    text-transform: uppercase;
-                    letter-spacing: 0.25rem;
+                gap: 2rem;
+                &_top {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1rem;
+                    span {
+                        color: var(--second-accent-color);
+                        font-size: 1.5rem;
+                    }
+                    h2 {
+                        font-size: 1.5rem;
+                        font-weight: 700;
+                        color: var(--title-color);
+                        text-transform: uppercase;
+                        letter-spacing: 0.25rem;
+                    }
                 }
 
                 p {
@@ -141,6 +162,28 @@
                     justify-content: flex-start;
                     gap: 1rem;
                     width: 100%;
+                }
+
+                a {
+                    font-size: 1rem;
+                    color: var(--second-accent-color);
+                    text-decoration: none;
+                    background-color: var(--accent-color);
+                    padding: 1rem;
+                    transition: color 0.3s ease-in-out;
+                }
+            }
+
+            &_left {
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                    margin-bottom: 2rem;
+
+                    @media (max-width: 768px) {
+                        height: 100%;
+                        margin-bottom: 0;
+                    }
                 }
             }
         }

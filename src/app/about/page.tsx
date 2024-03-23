@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from "./page.module.scss"
 import Image from 'next/image'
+import OurTeam from '@/components/ourTeam'
 
 const page = () => {
     return (
@@ -27,6 +28,7 @@ const page = () => {
                     </div>
                     <div className={styles.about__story__container_right}>
                         <div className={styles.about__story__container_right_top}>
+                            <span> | </span>
                             <h2>Our Story</h2>
                         </div>
                         <div className={styles.about__story__container_right_middle}>
@@ -39,6 +41,7 @@ const page = () => {
                         </div>
                     </div>
                 </div>
+                <OurTeam />
             </section>
         </main>
     )
