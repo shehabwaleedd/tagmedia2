@@ -4,7 +4,9 @@ import styles from './style.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-
+import { TbMenu2 } from "react-icons/tb";
+import Nav from "./nav"
+import { AnimatePresence } from 'framer-motion'
 interface LinkItem {
     href: string;
     label: string;
@@ -19,6 +21,12 @@ const Navbar = () => {
     const pathname = usePathname()
     const [scroll, setScroll] = useState<boolean>(false);
     const [destination, setDestination] = useState<string>('');
+    const [menuOpened, setMenuOpened] = useState<boolean>(false);
+
+    const toggleMenu = () => {
+        setMenuOpened(!menuOpened)
+    }
+
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -68,12 +76,18 @@ const Navbar = () => {
                 <ul className={styles.links}>
                     {links.map(link => (
                         <li key={link.href}>
-                            <Link href={link.href}  className={pathname === link.href ? styles.activeLink : ''}>
+                            <Link href={link.href} className={pathname === link.href ? styles.activeLink : ''}>
                                 {link.label}
                             </Link>
                         </li>
                     ))}
                 </ul>
+                <div className={styles.hamburger} onClick={toggleMenu}>
+                    <TbMenu2 />
+                </div>
+                <AnimatePresence mode="wait">
+                    {menuOpened && <Nav setMenuOpened={setMenuOpened} />}
+                </AnimatePresence>
             </header>
         </nav>
     )
