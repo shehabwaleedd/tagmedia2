@@ -19,24 +19,12 @@ type RouteDestinationMap = {
 
 const Navbar = () => {
     const pathname = usePathname()
-    const [scroll, setScroll] = useState<boolean>(false);
     const [destination, setDestination] = useState<string>('');
     const [menuOpened, setMenuOpened] = useState<boolean>(false);
 
     const toggleMenu = () => {
         setMenuOpened(!menuOpened)
     }
-
-
-    useEffect(() => {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                setScroll(true)
-            } else {
-                setScroll(false)
-            }
-        })
-    }, [])
 
     useEffect(() => {
         const pathToDestination: RouteDestinationMap = {
@@ -75,7 +63,7 @@ const Navbar = () => {
                 </div>
                 <ul className={styles.links}>
                     {links.map(link => (
-                        <li key={link.href}>
+                        <li key={link.href} >
                             <Link href={link.href} className={pathname === link.href ? styles.activeLink : ''}>
                                 {link.label}
                             </Link>

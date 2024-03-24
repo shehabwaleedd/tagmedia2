@@ -62,8 +62,8 @@
     }
 }
 
-.activeLink {
 
-    color: var(--second-accent-color);
-
+.navbar__container ul li .activeLink {
+    color: var(--second-accent-color); /* Example color, adjust as necessary */
+    border-bottom: 1px solid var(--second-accent-color);
 }
