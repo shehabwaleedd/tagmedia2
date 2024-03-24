@@ -4,14 +4,14 @@
     width: 100%;
     z-index: 9999;
     background-color: var(--accent-color);
-    top: 6.5vh;
+    top: 0vh;
     left: 0;
-    height: 100lvh;
+
     .hamburger {
         display: flex;
         justify-content: flex-end;
-        color: var(--background-color);
-        font-size: 2rem;
+        color: var(--second-accent-color);
+        font-size: 3rem;
         z-index: 9999;
         position: absolute;
         right: 3rem;
@@ -25,10 +25,10 @@
 
     }
 
-    .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

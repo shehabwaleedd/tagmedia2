@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "./style.module.scss"
-import ContactForm from "@/components/contact"
+import ContactForm from "@/components/contactForm"
 const index = () => {
     return (
         <section className={styles.contactHomePage}>

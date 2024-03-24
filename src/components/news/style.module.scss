@@ -28,6 +28,7 @@
 
         @media (max-width: 555px) {
             max-width: 95vw;
+            padding: 1rem;
         }
         &__slide {
             display: flex;
@@ -87,9 +88,6 @@
                     text-align: center;
                     background-color: var(--accent-color);
                     transition: var(--animation-primary);
-                    @media (max-width: 768px) {
-                        color: var(--title-color);
-                    }
                 }
             }
         }

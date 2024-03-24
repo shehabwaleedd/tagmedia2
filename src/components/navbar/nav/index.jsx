@@ -2,7 +2,6 @@ import styles from './style.module.scss';
 import { motion } from 'framer-motion';
 import { width } from '../anim';
 import Body from './Body';
-import Footer from './Footer';
 
 
 const links = [
@@ -44,7 +43,6 @@ export default function Index({ setMenuOpened }) {
         </button>
         <div className={styles.container}>
           <Body links={links} />
-          <Footer />
         </div>
       </div>
     </motion.div >

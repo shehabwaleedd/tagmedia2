@@ -16,11 +16,8 @@ const index = () => {
             <div className={styles.integration__container}>
                 {data.map((image, index) => {
                     return (
-                        <div key={index} className={styles.integration__container__image}>
-                            <Image src={image} alt="Integration" width={400} height={400} />
-                        </div>
-                    )
-                })}
+                        <Image key={index} src={image} alt="Integration" width={400} height={400} />
+                    )})}
             </div>
         </section>
     )
