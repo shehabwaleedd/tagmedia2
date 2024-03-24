@@ -2,7 +2,8 @@ import React from 'react'
 import styles from './style.module.scss'
 import Image from 'next/image'
 
-const index = () => {
+
+const ServicesLanding = () => {
 
     const data = [
         {
@@ -58,4 +59,4 @@ const index = () => {
     )
 }
 
-export default index
+export default ServicesLanding
