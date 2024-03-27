@@ -63,13 +63,16 @@ const Partners = () => {
                 Our Partners
             </h2>
             <Swiper
-                slidesPerView={"auto"}
                 navigation={true}
                 modules={[Navigation]}
                 onSwiper={setSwiper}
                 breakpoints={{
                     380: {
-                        slidesPerView: 2,
+                        slidesPerView: 3,
+                        spaceBetween: -10,
+                    },
+                    555: {
+                        slidesPerView: 6,
                         spaceBetween: -10,
                     },
                     768: {

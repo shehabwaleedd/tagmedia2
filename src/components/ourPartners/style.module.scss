@@ -35,7 +35,6 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
         gap: 0;
         width: 100%;
 
@@ -58,8 +57,15 @@
 
                 @media (max-width: 768px) {
                     height: 50vh;
-                    min-height: 50vh;
+                    min-height: 49.99vh;
                     max-height: 50vh;
+                    object-fit: cover;
+                }
+                @media (max-width: 568px) {
+                    height: 50vh;
+                    min-height: 39.99vh;
+                    max-height: 40vh;
+                    object-fit: cover;
                 }
             }
 
