@@ -31,13 +31,25 @@ type Metadata = {
     };
   };
   apple: {
-    statusBarStyle: "default" | "black" | "black-translucent";
+    statusBarStyle: "default" | "black" | "black-translucent" | "#142B6B";
   };
   ms: {
     tileColor: string;
   };
   canonical: string;
 };
+
+export const viewport = {
+  width: "device-width",
+  height: "device-height",
+  initialScale: 1,
+  minimumScale: 1,
+  maximumScale: 5,
+  userScalable: "yes",
+  viewportFit: "cover",
+  themeColor: "#142B6B",
+}
+
 
 export const metadata: Metadata = {
   title: "Tag Media",
@@ -68,7 +80,8 @@ export const metadata: Metadata = {
     },
   },
   apple: {
-    statusBarStyle: "black-translucent",
+    statusBarStyle: "default",
+
   },
   ms: {
     tileColor: "#000000",
