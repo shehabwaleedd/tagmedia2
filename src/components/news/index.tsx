@@ -66,7 +66,6 @@ const NewsHomePage = () => {
                 navigation={true}
                 slidesPerView={"auto"}
                 spaceBetween={30}
-                pagination={{ clickable: true }}
                 modules={[Navigation]}
                 breakpoints={{
                     440: {

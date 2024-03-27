@@ -45,6 +45,10 @@ const Navbar = () => {
         { href: "/contact", label: "Contact" },
     ];
 
+    useEffect(() => {
+        setMenuOpened(false)
+    } , [pathname])
+
 
 
 
