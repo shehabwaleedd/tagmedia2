@@ -1,7 +1,24 @@
 import React from 'react'
 import Image from 'next/image'
 import styles from './style.module.scss'
-const Landing = () => {
+import * as contenful from "contentful";
+
+
+interface Contentful {
+    space: string;
+    accessToken: string;
+}
+
+var client = contenful.createClient({
+    space: process.env.CONTENTFUL_SPACE_ID ?? '',
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN || ''
+});
+
+const url = `${process.env.BASE_URL}/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/staging/entries?access_token=${process.env.CONTENTFUL_ACCESS_TOKEN}`
+
+console.log(url)
+
+export default function Landing() {
     return (
         <section className={styles.landing} >
             <div className={styles.landing__container}>
@@ -23,4 +40,15 @@ const Landing = () => {
     )
 }
 
-export default Landing
+
+
+export async function getStaticProps() {
+    const res = await client.getEntries({ content_type: 'landing' });
+    const landing = res.items[0].fields;
+    console.log(res)
+    return {
+        props: {
+            landing
+        }
+    }
+}
