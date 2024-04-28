@@ -12,6 +12,22 @@
         color: #000
     }
 
+    &__upper {
+        width: 100%;
+        img {
+            width: 100%;
+            margin-bottom: 2rem;
+            object-fit: cover;
+            clip-path: var(--clip-path);
+            height: 70vh;
+
+            @media (max-width: 768px) {
+                margin-bottom: 0;
+                clip-path: var(--mobile-clip-path);
+            }
+        }
+    }
+
     &__content {
         display: flex;
         flex-direction: column;
@@ -20,7 +36,7 @@
         width: 100%;
         gap: 1rem;
         position: relative;
-        top: -12rem;
+        top: -14rem;
         max-width: 70%;
         margin: 0 auto;
 

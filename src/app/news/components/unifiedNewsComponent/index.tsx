@@ -1,13 +1,12 @@
 import React from 'react'
 import styles from "./style.module.scss"
 import { NewsType } from '@/types/common'
-// import { serverUseToursByIds } from '@/lib/tours/serverUseToursByIds'
 import { serverUseNewsQuery } from '@/lib/news/serverUseNewsQuery'
 import NewsCards from '../NewsCards'
 
 interface NewsProps {
     category?: string;
-    type?: string; // Optional type to distinguish between different modes
+    type?: string; 
 }
 
 
