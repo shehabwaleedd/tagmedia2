@@ -10,7 +10,7 @@ export const useNewsById = (id: string) => {
             setLoading(true);
             try {
                 const response = await axios.get<NewsType>(
-                    `${process.env.NEXT_PUBLIC_BASE_URL}/tour/${id}`,
+                    `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${id}`,
                 );
                 if (response.status === 200 && response.data) {
                     setNews(response.data);

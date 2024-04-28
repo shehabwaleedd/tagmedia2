@@ -1,25 +1,25 @@
 ''
 import React from 'react';
 import Image from 'next/image';
-import { useNewsPage } from '@/lib/useNewsPage';
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { serverUseNewsByTitle } from '@/lib/news/serverUseNewsByTitle';
 import styles from "./page.module.scss";
 import Link from 'next/link';
+import ImageSlider from '@/components/imageSlider/ImageSlider';
+import UnifiedNewsComponent from '../components/unifiedNewsComponent';
 
 
 export default async function NewsDetails({ params: { slug } }: { params: { slug: string } }) {
-    const data = await useNewsPage();
-    const news = data.items ? data.items.find((item: any) => item.fields.slug === slug) : null;
 
-    if (!news) {
-        return (
-            <main className={styles.details}>
-                <h1>News Not Found</h1>
-            </main>
-        );
-    }
-    const featuredImage = news.fields.featuredImage ? data.includes.Asset.find((asset: any) => asset.sys.id === news.fields.featuredImage.sys.id) : null;
-    const authorImage = news.fields.author ? data.includes.Asset.find((asset: any) => asset.sys.id === news.fields.author.sys.id) : null;
+    const unslugify = (text: string) => {
+        return text
+            .replace(/-/g, ' ')
+            .replace(/\w\S*/g, (word) => word.charAt(0).toUpperCase() + word.substr(1).toLowerCase());  // Capitalize the first letter of each word
+    };
+
+    const title = unslugify(slug);
+    const newsDetails = await serverUseNewsByTitle(title);
+    console.log(newsDetails, "news Details")
+
 
     return (
         <main className={styles.details}>
@@ -27,44 +27,30 @@ export default async function NewsDetails({ params: { slug } }: { params: { slug
                 <Link href="/news">
                     Back to News
                 </Link>
-
             </div>
-            {featuredImage && (
-                <div className={styles.featuredImage}>
-                    <Image
-                        src={`https:${featuredImage.fields.file.url}`}
-                        alt={news.fields.title}
-                        width={1300}
-                        height={1000}
-                    />
-                </div>
-            )}
-            <div className={styles.group}>
-                <h1>{news.fields.title}</h1>
-                <p>Created at: {news.sys.createdAt.substring(0, 10)}</p>
-            </div>
-            <div className={styles.metadata}>
-                {authorImage && (
-                    <div className={styles.author}>
-                        <Image
-                            src={`https:${authorImage.fields.file.url}`}
-                            alt={news.fields.author.fields.name}
-                            width={50}
-                            height={50}
-                            layout='fixed'
-                        />
-                        <p>{news.fields.author.fields.name}</p>
+            <section className={styles.details__upper}>
+                <Image src="/assets/covers/news cover 2.webp" alt="news" width={1920} height={1080} />
+            </section>
+            <section className={styles.details__content}>
+                {newsDetails?.images && <ImageSlider images={newsDetails.images} name='slider' />}
+                <div className={styles.details__upper_content}>
+                    <h1>{newsDetails?.title}</h1>
+                    <div>
+                        {newsDetails?.section && newsDetails?.section.map((section: any, index: number) => {
+                            return (
+                                <div key={index}>
+                                    <h2>{section.title}</h2>
+                                    <p>{section.subTitle}</p>
+                                    <p>{section.description}</p>
+                                </div>
+                            )
+                        })}
                     </div>
-                )}
-            </div>
-            <div className={styles.content}>
-                {documentToReactComponents(news.fields.content)}
-            </div>
-            {/* <ShareSocial
-                style={{ backgroundColor: 'white', color: 'black', padding: '10px' }}
-                url={window.location.href}
-                socialTypes={['facebook', 'twitter', 'reddit', 'linkedin']}
-            /> */}
+                </div>
+            </section>
+            <UnifiedNewsComponent type='recommended' />
+            <UnifiedNewsComponent type='like' />
+
         </main>
     );
 }
