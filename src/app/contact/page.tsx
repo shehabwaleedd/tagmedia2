@@ -10,7 +10,7 @@ const page = () => {
     return (
         <main className={styles.contact}>
             <section className={styles.contact__container}>
-                <Image src="/assets/covers/contact cover.webp" alt="Landing" width={500} height={500} />
+                <Image src="/assets/covers/contact cover.webp" alt="Landing" width={1800} height={1080} />
                 <div className={styles.contact__container__content}>
                     <h1>Keep in touch</h1>
                     <p> Let&apos;s work together to create something unique. </p>

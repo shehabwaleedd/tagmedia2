@@ -25,16 +25,6 @@
         max-width: 80vw;
         margin: 0 auto;
 
-        img {
-            width: 10rem;
-            object-fit: cover;
-            position: relative;
-
-            @media (max-width: 768px) {
-                height: 5rem;
-                width: 5rem;
-            }
-        }
 
         h1 {
             font-size: 2rem;
