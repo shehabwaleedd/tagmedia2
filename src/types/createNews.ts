@@ -4,6 +4,7 @@ export interface Img {
 }
 export interface ImageFile {
     file: File;
+    previewUrl?: string | null;
 }
 export interface ImageFileEdit {
     file: File;
@@ -16,13 +17,6 @@ export interface CurrentImage {
 }
 
 
-export interface DynamicFieldArrayProps {
-    name: string;
-    label: string;
-    fieldType: 'input' | 'select';
-    options?: Array<{ label: string; value: string }>;
-
-}
 
 export interface Option {
     name?: string;
@@ -69,14 +63,13 @@ export interface GroupSize {
 }
 
 
-export interface PricingOptionsProps {
-    name: 'adultPricing' | 'childrenPricing';
 
-}
 
 export interface ImageUploaderProps {
     mainImg: File | null;
     setMainImg: (img: File | null) => void;
+    mainImgUrl?: string | null;
+    setMainImgUrl?: (url: string) => void;
 }
 
 export interface ImagesUploaderProps {
