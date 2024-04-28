@@ -3,7 +3,6 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    // padding: 15.5vh 2rem;
     width: 100%;
     height: 100%;
     position: relative;
@@ -21,6 +20,12 @@
     // }
 
     &__upper {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    &__upper_content {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -50,6 +55,7 @@
                 font-size: 1.6rem;
             }
         }
+
         .divider {
             width: 10vw;
             height: 1px;
@@ -66,48 +72,98 @@
         max-width: 70vw;
         width: 100%;
         margin: 0 auto;
+        position: relative;
+        top: -10rem;
+
         &__card {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 1rem;
-            padding: 2rem;
+            padding: 0.5rem;
             background-color: var(--background-color);
             border-radius: 1rem;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%;
+
+            @media (max-width: 555px) {
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
             a {
                 flex-wrap: wrap;
             }
+
+            img {
+                height: 30.5vh;
+                max-height: 31vh;
+                min-height: 30.5vh;
+                max-width: 23.5vw;
+                min-width: 23vw;
+                object-fit: cover;
+                border-radius: var(--normal-border-radius);
+            }
+
             h2 {
-                font-size: 2rem;
-                font-weight: 700;
-                color: var(--primary-color);
-                text-transform: uppercase;
-                letter-spacing: 0.25rem;
+                font-size: var(--big-font-size);
+                color: var(--title-color);
+                text-transform: capitalize;
+                letter-spacing: 0.05rem;
                 font-family: var(--bold-font);
             }
+
             p {
-                font-size: 1.6rem;
-                font-weight: 400;
+                font-size: var(--body-font-size);
                 color: var(--text-color);
-                text-align: center;
-                font-family: var(--regular-font);
+                text-align: left;
+                font-family: var(--subtitle-font);
                 line-break: anywhere;
             }
-            a {
-                font-size: 1.6rem;
-                font-weight: 700;
-                color: var(--primary-color);
-                text-transform: uppercase;
-                letter-spacing: 0.25rem;
-                font-family: var(--bold-font);
-                text-decoration: none;
-                transition: all 0.3s;
-                &:hover {
-                    color: var(--secondary-color);
+
+            .column {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                width: 100%;
+                gap: 1rem;
+                .group {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 100%;
+                    align-items: center;
+                    gap: 1rem;
+
+                    p {
+                        max-width: 70%;
+                    }
+
+                    a {
+                        background-color: var(--accent-color);
+                        padding: 0.5rem;
+                        border-radius: var(--normal-border-radius);
+                        text-align: center;
+                        transition: var(--animation-primary);
+
+                        span {
+                            color: var(--container-color);
+                        }
+
+                        &:hover {
+                            transition: var(--animation-primary);
+                            background-color: var(--second-accent-color);
+                            border-radius: 0;
+
+                            span {
+                                color: var(--accent-color);
+                            }
+                        }
+                    }
                 }
             }
+
         }
     }
 }
