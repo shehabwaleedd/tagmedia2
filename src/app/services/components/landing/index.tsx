@@ -35,7 +35,6 @@ const ServicesLanding = () => {
     return (
         <section className={styles.landing} >
             <div className={styles.landing__container}>
-                <Image src="/assets/covers/services cover.webp" alt="Landing" width={500} height={500} />
                 <div className={styles.landing__container__content}>
                     <h1>Our Services</h1>
                     <div className={styles.landing__container__content_grid}>

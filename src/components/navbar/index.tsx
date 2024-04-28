@@ -32,6 +32,7 @@ const Navbar = () => {
             '/about': 'about',
             '/services': 'services',
             '/news': 'news',
+            '/news/': 'news',
             '/contact': 'contact',
         };
         setDestination(pathToDestination[pathname] || '');
@@ -63,6 +64,7 @@ const Navbar = () => {
                             width={100}
                             height={100}
                         />
+                        <h2>Tag Media</h2>
                     </Link>
                 </div>
                 <ul className={styles.links}>

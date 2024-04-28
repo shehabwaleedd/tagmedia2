@@ -7,6 +7,7 @@ import Integration2 from "@/components/integration2"
 import OurTeam from "@/components/ourTeam";
 import ContactHomePage from "@/components/contact"
 import FooterUpper from "@/components/footerUpper"
+import Announcment from "@/animation/marquee/Marquee";
 
 export default function Home() {
   return (
@@ -14,7 +15,8 @@ export default function Home() {
       <Landing />
       <ServicesHomePage />
       <NewsHomePage />
-      <Partners />
+      {/* <Partners /> */}
+      <Announcment />
       <Integration />
       <OurTeam />
       <Integration2 />

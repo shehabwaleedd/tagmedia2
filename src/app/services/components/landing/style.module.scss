@@ -6,10 +6,9 @@
     background-color: var(--container-color);
     width: 100%;
     gap: 5vh;
-    padding-top: 10vh;
+    padding: 10vh 2rem;
 
     @media (max-width: 768px) {
-        padding-top: 0;
         min-height: auto;
     }
 
@@ -27,23 +26,11 @@
             height: fit-content;
         }
 
-        img {
-            width: 100%;
-            margin-bottom: 2rem;
-            object-fit: cover;
 
-            @media (max-width: 768px) {
-                height: 70vh;
-                margin-bottom: 0;
-            }
-        }
 
         &__content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            position: relative;
             width: 100%;
-            transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -63,7 +50,7 @@
             h1 {
                 font-size: 3rem;
                 font-weight: 700;
-                color: var(--background-color);
+                color: var(--accent-color);
                 text-transform: uppercase;
                 letter-spacing: 0.25rem;
 
@@ -104,13 +91,12 @@
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    padding: 10vh 4rem;
-
-                    background-color: var(--container-color);
-                    transition: all 0.3s ease-in-out;
+                    padding: 2rem;
+                    border-radius: var(--normal-border-radius);
+                    background-color: var(--accent-color);
+                    transition: var(--animation-primary);
                     cursor: pointer;
                     height: 100%;
-                    min-height: 55vh;
 
                     @media (max-width: 768px) {
                         min-height: auto;
@@ -125,7 +111,7 @@
                     h2 {
                         font-size: 1.25rem;
                         font-weight: 700;
-                        color: var(--accent-color);
+                        color: var(--container-color);
                         text-transform: uppercase;
                         letter-spacing: 0.05rem;
                         margin-bottom: 1rem;
@@ -179,6 +165,7 @@
             color: var(--title-color);
             text-transform: uppercase;
             letter-spacing: 0.25rem;
+            text-align: center;
 
             @media (max-width: 768px) {
                 font-size: 1.6rem;
@@ -193,7 +180,7 @@
 
             @media (max-width: 768px) {
                 font-size: 0.8rem;
-                width: 80%;
+                width: 100%;
             }
         }
 

@@ -7,7 +7,6 @@ const page = () => {
     return (
         <main className={styles.about}>
             <section className={styles.about__container}>
-                <Image src="/logo2.png" alt="Logo" width={300} height={300} />
                 <h1>About Tag Media</h1>
                 <p>Tag-Media is one of the marketing and creative consultancy agencies in Egypt and the Middle east. We are working closely with our partners to manage their publicity and social media presence.We build awareness campaigns for our clients that would drive more tra c and engagement.</p>
             </section>

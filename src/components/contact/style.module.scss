@@ -31,7 +31,7 @@
         max-width: 80vw;
 
         @media (max-width: 768px) {
-            display: flex;  
+            display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
@@ -49,6 +49,8 @@
             padding: 5rem;
             gap: 5vh;
             width: 100%;
+            border-radius: var(--normal-border-radius);
+
             @media (max-width: 768px) {
                 padding: 3rem;
             }
@@ -62,30 +64,17 @@
 
             }
 
-            p {
-                font-size: 1.4rem;
+            p, a {
+                font-size: 1rem;
+                font-family: var(--subtitle-font);
                 font-weight: 200;
-                color: var(--border-color);
+                color: var(--subtitle-color);
                 text-align: left;
-                max-width: 100%;
-                @media (max-width: 768px) {
-                    font-size: 1rem;
-                }
-
-            }
-
-            a {
-                font-size: 1.4rem;
-                font-weight: 200;
-                color: var(--border-color);
                 text-decoration: none;
-                transition: color 0.3s ease;
                 @media (max-width: 768px) {
                     font-size: 1rem;
                 }
-                &:hover {
-                    color: var(--accent-color);
-                }
+
             }
 
             &_header {
@@ -103,21 +92,24 @@
             padding: 5rem;
             gap: 5vh;
             width: 100%;
+            border-radius: var(--normal-border-radius);
 
             @media (max-width: 768px) {
                 padding: 3rem;
             }
+
             input {
                 width: 100%;
-                padding: 1rem;
+                padding: 0.4rem;
                 padding-left: 0;
                 font-size: 1rem;
-                font-weight: 200;
+                font-family: var(--subtitle-font);
                 color: var(--border-color);
                 background-color: transparent;
-                border: none;
+                border: 0;
                 border-bottom: 1px solid var(--border-color);
-                transition: border 0.3s ease;
+                transition: var(--animation-primary);
+                border-radius: 0;
 
                 &:focus {
                     border-bottom: 1px solid var(--accent-color);
@@ -127,16 +119,16 @@
 
             textarea {
                 width: 100%;
-                padding: 1rem 0;
-                min-height: 15vh;
+                min-height: 10vh;
                 font-size: 1rem;
                 font-weight: 200;
                 color: var(--border-color);
+                font-family: var(--subtitle-font);
                 background-color: transparent;
                 border: none;
-                border-radius: 0;
                 border-bottom: 1px solid var(--border-color);
-                transition: border 0.3s ease;
+                border-radius: 0;
+                transition: var(--animation-primary);
 
                 &:focus {
                     border-bottom: 1px solid var(--accent-color);
@@ -152,9 +144,9 @@
                 background-color: var(--accent-color);
                 border: none;
                 cursor: pointer;
-                transition: background-color 0.3s ease;
-
+                transition: var(--animation-primary);
                 &:hover {
+                    transition: var(--animation-primary);
                     background-color: var(--second-accent-color);
                 }
             }

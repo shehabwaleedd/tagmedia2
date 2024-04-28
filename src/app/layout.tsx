@@ -1,6 +1,8 @@
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import FooterF from "@/components/footer";
+import WhatsappIcon from "@/components/whatsappIcon";
+import { AuthProvider } from "@/context/AuthContext";
 
 type Metadata = {
   title: string;
@@ -98,9 +100,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
-        <FooterF />
+        <AuthProvider>
+          <Navbar />
+          {children}
+          <WhatsappIcon />
+          <FooterF />
+        </AuthProvider>
       </body>
     </html>
   );

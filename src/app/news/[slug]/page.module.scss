@@ -1,0 +1,40 @@
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 70vh;
+    padding: 15.5vh 2rem;
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #000
+    }
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+
+}
+
+.featuredImage {
+    img {
+        height: 60vh;
+        object-fit: cover;
+    }
+
+}
+
+.group {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}

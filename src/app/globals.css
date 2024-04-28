@@ -24,14 +24,14 @@
 
   /* Fonts */
 
-  --body-font: 'Avantt-Regular', sans-serif;
-  --subtitle-font: 'ClashDisplay-Thin', sans-serif;
-  --medium-font: 'Avantt-Medium', sans-serif;
-  --title-font: 'Avantt-Bold', sans-serif;
-  --heavy-font: "Avantt-Heavy", sans-serif;
-  --semi-bold-font: "Avantt-SemiBold", sans-serif;
+  --body-font: 'Poppins-Regular', sans-serif;
+  --subtitle-font: 'Poppins-Thin', sans-serif;
+  --medium-font: 'Poppins-Medium', sans-serif;
+  --title-font: 'Poppins-Bold', sans-serif;
   /* Font Sizes Based on Golden Ratio */
 
+
+  --normal-border-radius: 0.5rem;
 
 
   --small-font-size: 0.8rem;
@@ -132,4 +132,39 @@ img {
 
 .hiddenn {
   display: none;
+}
+
+
+@font-face {
+  font-family: 'Poppins-Regular';
+  src: url('../../public/fonts/Poppins-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Light';
+  src: url('../../public/fonts/Poppins-Light.woff2') format('woff2');
+  font-weight: 200;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins-Bold';
+  src: url('../../public/fonts/Poppins-Bold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+
+
+@font-face {
+  font-family: 'Poppins-Medium';
+  src: url('../../public/fonts/Poppins-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
 }
