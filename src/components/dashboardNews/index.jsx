@@ -10,7 +10,7 @@ import axios from 'axios'
 const DashboardNews = ({ news, loading, title }) => {
     const router = useRouter();
     const handleEditClick = (eventId) => {
-        router.push(`/account/news/edit/${eventId}`);
+        router.push(`/account/edit/blog/${eventId}`);
     };
 
     const handleDeleteClick = async (eventId) => {
@@ -52,13 +52,13 @@ const DashboardNews = ({ news, loading, title }) => {
                             <Image src={event.mainImg ? event.mainImg.url : "/noimage.png"} alt={event.title} width={500} height={500} quality={100} />
                             <div className={styles.userTours__container_card_top_bottom}>
                                 <div className={styles.userTours__container_card_top_bottom_lower}>
-                                    <button onClick={() => handleEditClick(event._id)}>
+                                    <button onClick={() => handleEditClick(event.slug)}>
                                         <span style={{ backgroundColor: "#2e2e2e", color: "var(--container-color)" }}>
                                             Edit
                                         </span>
                                     </button>
 
-                                    <button onClick={() => handleDeleteClick(event._id)}>
+                                    <button onClick={() => handleDeleteClick(event.slug)}>
                                         <span style={{ backgroundColor: "#ef6363" }}>
                                             Delete
                                         </span>
@@ -73,7 +73,7 @@ const DashboardNews = ({ news, loading, title }) => {
                                 </div>
                             </div>
                             <p className={styles.p}>
-                                {event.subTitle.slice(0, 150)}..
+                                {event.subTitle.replace(/<[^>]*>?/gm, '').slice(0, 100)}..
                             </p>
                             <div className={styles.userTours__container_card_bottom_lower}>
                                 <p>{event.category}</p>

@@ -10,7 +10,7 @@ import Link from 'next/link';
 const NewsCard: React.FC<{ news: NewsType }> = ({ news }) => {
 
     const router = useRouter();
-    const slugTitle = news.title.replace(/ /g, '-').toLowerCase();
+    const slugTitle = news?.title?.replace(/ /g, '-').toLowerCase();
 
 
     if (!news) {
@@ -25,7 +25,7 @@ const NewsCard: React.FC<{ news: NewsType }> = ({ news }) => {
 
 
     const handleTourClick = (title: string) => {
-        router.push(`/tours/${title}`);
+        router.push(`/news/${title}`);
     }
 
 
@@ -33,15 +33,15 @@ const NewsCard: React.FC<{ news: NewsType }> = ({ news }) => {
     return (
         <div className={styles.news__container_card} onClick={() => handleTourClick(slugTitle)}>
             <div className={styles.image}>
-                <Image src={news.mainImg.url} alt={news.title} width={500} height={500} />
+                <Image src={news?.mainImg?.url} alt={news.title} width={500} height={500} />
 
             </div>
             <div className={styles.bottom}>
-                <h3>{news.title.slice(0, 50)}...</h3>
+                <h3>{news?.title?.slice(0, 50)}...</h3>
                 <div className={styles.category}>
-                    <p>{news.category}</p>
+                    <p>{news?.category}</p>
                 </div>
-                <p>{news.subTitle.replace(/<[^>]*>/g, '').slice(0, 150)}...</p>
+                <p>{news?.subTitle?.replace(/<[^>]*>/g, '').slice(0, 150)}...</p>
                 <div className={styles.btnDiv}>
                     <div className={styles.author}>
                         <Image src="/logo.webp" alt="Tag" width={20} height={20} />

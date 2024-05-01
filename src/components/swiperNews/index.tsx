@@ -67,10 +67,6 @@ const SwiperNews = (
                         slidesPerView: 3,
                         spaceBetween: 50,
                     },
-                    1888: {
-                        slidesPerView: 4,
-                        spaceBetween: 50,
-                    }
                 }}
                 className={styles.swiper}
             >

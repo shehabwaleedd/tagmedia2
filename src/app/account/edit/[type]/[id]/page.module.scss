@@ -1,0 +1,30 @@
+.editPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: fit-content;
+    padding: 10vh 0;
+    margin: 0 auto;
+    &_upper {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        a {
+            color: var(--title-color);
+
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.editContainer {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    background-color: var(--container-color);
+}

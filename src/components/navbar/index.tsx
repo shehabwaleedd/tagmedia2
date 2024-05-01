@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { TbMenu2 } from "react-icons/tb";
 import Nav from "./nav"
 import { AnimatePresence } from 'framer-motion'
+import { useAuth } from '@/context/AuthContext'
 interface LinkItem {
     href: string;
     label: string;
@@ -21,6 +22,7 @@ const Navbar = () => {
     const pathname = usePathname()
     const [destination, setDestination] = useState<string>('');
     const [menuOpened, setMenuOpened] = useState<boolean>(false);
+    const { isLoggedIn } = useAuth()
 
     const toggleMenu = () => {
         setMenuOpened(!menuOpened)
@@ -34,6 +36,7 @@ const Navbar = () => {
             '/news': 'news',
             '/news/': 'news',
             '/contact': 'contact',
+            '/account': 'account',
         };
         setDestination(pathToDestination[pathname] || '');
     }, [pathname]);
@@ -46,9 +49,14 @@ const Navbar = () => {
         { href: "/contact", label: "Contact" },
     ];
 
+    if (isLoggedIn) {
+        links.push({ href: "/account", label: "Account" });
+    }
+    
+
     useEffect(() => {
         setMenuOpened(false)
-    } , [pathname])
+    }, [pathname])
 
 
 

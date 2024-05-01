@@ -10,49 +10,22 @@ import styles from './style.module.scss'
 import Link from 'next/link';
 import { Swiper as SwiperType } from 'swiper';
 import Image from 'next/image'
+import useDynamicFetchClient from '@/lib/useDynamicFetchClient';
 SwiperCore.use([Navigation, Pagination]);
 
+
 const OurTeam = () => {
-    const [swiper, setSwiper] = useState<SwiperType | null>(null);
+    const swiperRef = useRef<SwiperType | null>(null);
+    const { data, error } = useDynamicFetchClient('team');
+    if (error) return <p>Error: {error}</p>;
+    if (!data) return <p>Loading...</p>;
+    const team = data;
+    const setSwiper = (swiper: SwiperType) => {
+        swiperRef.current = swiper;
+    };
 
 
-    const team = [
-        {
-            name: "Hesham Farok",
-            position: "Social Media",
-            image: "/assets/2.webp"
-        },
-        {
-            name: "Moshira Kaem",
-            position: "Social Media",
-            image: "/assets/6.webp"
-        },
-        {
-            name: "Farouq Yehia",
-            position: "CEO & Founder",
-            image: "/assets/2.webp"
-        },
-        {
-            name: "Aliaa Hassan",
-            position: "Senio Desginer",
-            image: "/assets/6.webp"
-        },
-        {
-            name: "Moshira Kaem",
-            position: "Social Media",
-            image: "/assets/6.webp"
-        },
-        {
-            name: "Farouq Yehia",
-            position: "CEO & Founder",
-            image: "/assets/2.webp"
-        },
-        {
-            name: "Aliaa Hassan",
-            position: "Senio Desginer",
-            image: "/assets/6.webp"
-        },
-    ]
+
 
     return (
         <section className={styles.team}>
@@ -67,7 +40,7 @@ const OurTeam = () => {
                 onSwiper={setSwiper}
                 breakpoints={{
                     380: {
-                        slidesPerView: 2,
+                        slidesPerView: 1,
                         spaceBetween: 10,
                     },
                     768: {
@@ -88,17 +61,15 @@ const OurTeam = () => {
                 }}
                 className={styles.swiper}
             >
-                {team.map((member, index) => {
-                    return (
-                        <SwiperSlide key={index} className={styles.swiper__slide}>
-                            <Image src={member.image} alt={member.name} width={400} height={400} />
-                            <div className={styles.swiper__slide__container}>
-                                <h3>{member.name}</h3>
-                                <p>{member.position}</p>
-                            </div>
-                        </SwiperSlide>
-                    )
-                })}
+                {team.map((member: any, index: number) => (
+                    <SwiperSlide key={index} className={styles.swiper__slide}>
+                        <div className={styles.swiper__slide__container}>
+                            <Image src={member.image.url} alt={member.name} width={800} height={400} />
+                            <h3>{member.name}</h3>
+                            <p>{member.position}</p>
+                        </div>
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </section>
     )

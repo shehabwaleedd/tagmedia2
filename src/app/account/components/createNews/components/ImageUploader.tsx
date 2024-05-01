@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from '../page.module.scss';
 import { ImageUploaderProps } from '@/types/createNews';
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({ mainImg, setMainImg }) => {
+const ImageUploader: React.FC<ImageUploaderProps> = ({ mainImg, setMainImg, title }) => {
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0] ?? null;
@@ -12,7 +12,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ mainImg, setMainImg }) =>
 
     return (
         <div className={styles.formField}>
-            <label htmlFor="mainImg">News&apos;s Main Image</label>
+            <label htmlFor="mainImg">{title} Image</label>
             <input
                 type="file"
                 onChange={handleImageChange}

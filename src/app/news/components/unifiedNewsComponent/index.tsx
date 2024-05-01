@@ -17,7 +17,7 @@ export default async function UnifiedNewsComponent({ category, type = 'recommend
 
     const shuffleAndSliceTo3 = (array: NewsType[]) => {
         const shuffledArray = array.sort(() => Math.random() - 0.5);
-        return shuffledArray.slice(0, 5);
+        return shuffledArray.slice(0, 3);
     }
 
     const newsArray = shuffleAndSliceTo3(await news);

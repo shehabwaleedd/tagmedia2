@@ -20,15 +20,15 @@ const NewsCards = ({ data, title }: { data: NewsType[], title?: string }) => {
             <>
                 {title && <h1>{title}</h1>}
             </>
-            {data.map((news: NewsType, index: number) => {
+            {data && data.map((news: NewsType, index: number) => {
                 return (
                     <div key={index} className={styles.news__content__card}>
-                        <Image src={news.mainImg.url} alt="news" width={400} height={400} />
+                        <Image src={news?.mainImg?.url} alt="news" width={400} height={400} />
                         <div className={styles.column}>
-                            <h2>{news.title}</h2>
+                            <h2>{news?.title}</h2>
                             <div className={styles.group}>
-                                <p>{news.subTitle.replace(/<[^>]*>/g, '').slice(0, 150)}</p>
-                                <Link href={`/news/${slugify(news.title)}`}><span>Read More</span></Link>
+                                <p>{news?.subTitle?.replace(/<[^>]*>/g, '').slice(0, 150)}</p>
+                                <Link href={`/news/${slugify(news?.title)}`}><span>Read More</span></Link>
                             </div>
                         </div>
                     </div>

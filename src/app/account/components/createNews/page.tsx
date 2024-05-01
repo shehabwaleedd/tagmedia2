@@ -41,45 +41,40 @@ const CreateNews = () => {
         }
 
         const appendFormData = (key: string, value: any) => {
-            if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
-                // For nested objects like location
-                Object.keys(value).forEach(subKey => {
-                    formData.append(`${key}[${subKey}]`, value[subKey]);
-                });
+            if (value instanceof File) {
+                formData.append(key, value);
             } else if (Array.isArray(value)) {
-                // For arrays like adultPricing, childrenPricing, options
-                value.forEach((item, index) => {
-                    if (typeof item === 'object') {
-                        Object.keys(item).forEach(subKey => {
-                            formData.append(`${key}[${index}][${subKey}]`, item[subKey].toString());
-                        });
+                value.forEach((val, index) => {
+                    if (val instanceof File) {
+                        formData.append(`${key}[${index}]`, val);
                     } else {
-                        formData.append(`${key}[${index}]`, item);
+                        formData.append(`${key}[${index}]`, val);
                     }
                 });
-            } else {
+            }
+            else {
                 formData.append(key, value);
             }
+
         };
 
         const formData = new FormData();
-        uploadedImages.forEach((file, index) => {
-            formData.append(`images`, file.file);
-        });
-        if (mainImg) {
-            formData.append('mainImg', mainImg);
-        }
 
-        values.section.forEach((section: { title: string, subTitle: string, description: string }, index: number) => {
-            formData.append(`section[${index}].title`, section.title);
-            formData.append(`section[${index}].subTitle`, section.subTitle);
-            formData.append(`section[${index}].description`, section.description);
-        });
-
-
-        Object.keys(values).forEach(key => {
-            if (key !== 'mainImg' && key !== 'images') {
-                appendFormData(key, values[key]);
+        Object.entries(values).forEach(([key, value]) => {
+            if (key === 'mainImg') {
+                formData.append('mainImg', mainImg || '');
+            } else if (key === 'images') {
+                (value as any[]).forEach((image: any, index: number) => {
+                    formData.append(`images`, image);
+                });
+            } else if (key === 'section') {
+                (value as any[]).forEach((section: any, index: number) => {
+                    Object.entries(section).forEach(([sectionKey, sectionValue]) => {
+                        appendFormData(`section[${index}][${sectionKey}]`, sectionValue);
+                    });
+                });
+            } else {
+                appendFormData(key, value);
             }
         });
 
@@ -91,9 +86,9 @@ const CreateNews = () => {
                     'Content-Type': 'multipart/form-data'
                 },
             });
-            if (response.status === 200) {
+            if (response.data.message === "success") {
                 setSuccess(true);
-                // router.push('/');
+                console.log("Success");
             }
         } catch (error: any) {
             setError(error.response?.data?.message || error.response?.err);
@@ -111,13 +106,13 @@ const CreateNews = () => {
                         <Form className={styles.createTour__container_content}>
                             <CustomField name="title" setFieldValue={setFieldValue} label='title' fieldType="input" />
                             <ReactQuillField name="subTitle" label="Subtitle" value={values.subTitle} onChange={setFieldValue} />
-                            <ImageUploader mainImg={mainImg} setMainImg={setMainImg} />
+                            <ImageUploader mainImg={mainImg} setMainImg={setMainImg} title='News Main'/>
                             <ImagesUploader uploadedImages={uploadedImages} setUploadedImages={setUploadedImages} />
                             <div className={styles.formField}>
                                 <FieldArray name="section">
                                     {({ insert, remove, push }) => (
                                         <div>
-                                            {values.section.map((section: any, index: number) => (
+                                            {values.section.map((section, index) => (
                                                 <div key={index}>
                                                     <Field name={`section.${index}.title`} placeholder="Section Title" />
                                                     <Field name={`section.${index}.subTitle`} placeholder="Section Subtitle" />
@@ -130,13 +125,19 @@ const CreateNews = () => {
                                             ))}
                                             <button
                                                 type="button"
-                                                onClick={() => push({ title: '', subTitle: '', description: '' })}
+                                                onClick={(e) => {
+                                                    e.preventDefault(); // Prevent default form submit action
+                                                    console.log("Adding new section before push");
+                                                    push({ title: '', subTitle: '', description: '' });
+                                                    console.log("Adding new section after push");
+                                                }}
                                             >
                                                 Add Section
                                             </button>
                                         </div>
                                     )}
                                 </FieldArray>
+
 
                             </div>
                             <div className={styles.formField}>

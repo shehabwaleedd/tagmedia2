@@ -26,3 +26,8 @@ export interface MainImg {
     public_id: string;
 }
 
+
+export interface ImageFile {
+    file: File | string; // File for uploads, string for existing URLs
+    previewUrl: string; // URL for displaying the image
+}

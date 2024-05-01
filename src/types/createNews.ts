@@ -70,6 +70,7 @@ export interface ImageUploaderProps {
     setMainImg: (img: File | null) => void;
     mainImgUrl?: string | null;
     setMainImgUrl?: (url: string) => void;
+    title: string;
 }
 
 export interface ImagesUploaderProps {

@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation'
 import styles from './page.module.scss'
 import Loading from '@/animation/loading/Loading'
 import AllTours from '@/components/accountComponents/allNews'
-import CreateTour from './news/createNews/page'
+import DisplayEntities from './components/displayEntity'
 import { AnimatePresence, motion } from 'framer-motion'
 import AdminView from "@/components/accountViews/admin"
-import CreateNews from './news/createNews/page'
+import CreateNews from './components/createNews/page'
+import CreateCommon from './components/createCommon'
 
 const Account = () => {
     const {  handleLogout, isLoggedIn } = useAuth();
@@ -53,6 +54,14 @@ const Account = () => {
                 <div className={styles.account__lower_right}>
                     <AnimatePresence mode='wait'>
                         {activeSection === 'createNews' && <CreateNews />}
+                        {activeSection === 'createPartner' && <CreateCommon type='partner' />}
+                        {activeSection === 'createWorkedWith' && <CreateCommon type='workedWith' />}
+                        {activeSection === 'createTeam' && <CreateCommon type='team' />}
+                        {activeSection === 'createPortfolio' && <CreateCommon type='portfolio' />}
+                        {activeSection === 'partners' && <DisplayEntities type='partner' />}
+                        {activeSection === 'workedWith' && <DisplayEntities type='workedWith' />}
+                        {activeSection === 'team' && <DisplayEntities type='team' />}
+                        {activeSection === 'portfolio' && <DisplayEntities type='portfolio' />}
                         {activeSection === 'news' && <AllTours />}
                         {activeSection === '' && <div className={styles.account__lower_right_default} style={{ padding: "1rem" }}><h2>Select a section to view</h2></div>}
                     </AnimatePresence>

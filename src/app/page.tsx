@@ -1,7 +1,6 @@
 import Landing from "@/components/landing";
 import ServicesHomePage from "@/components/serviceHome";
 import NewsHomePage from "@/components/news";
-import Partners from "@/components/ourPartners";
 import Integration from "@/components/integration"
 import Integration2 from "@/components/integration2"
 import OurTeam from "@/components/ourTeam";
@@ -15,7 +14,6 @@ export default function Home() {
       <Landing />
       <ServicesHomePage />
       <NewsHomePage />
-      {/* <Partners /> */}
       <Announcment />
       <Integration />
       <OurTeam />

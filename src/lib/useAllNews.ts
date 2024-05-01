@@ -11,7 +11,7 @@ export const useAllNews = (page: number) => {
         try {
             const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/blog?page=${page}`);
             if (response.status === 200 && response.data) {
-                setNews(response.data.data.result);
+                setNews(response.data.data);
             } else {
                 throw new Error("Failed to fetch event");
             }

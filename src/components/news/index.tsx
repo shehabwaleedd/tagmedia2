@@ -5,6 +5,10 @@ export default async function NewsHomePage() {
 
     const news = await serverUseNews();
 
+    if (!news) {
+        return null;
+    }
+    
 
     return (
         <section className={styles.newsHomePage}>
