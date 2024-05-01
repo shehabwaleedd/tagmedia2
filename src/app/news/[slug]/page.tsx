@@ -34,7 +34,7 @@ export default async function NewsDetails({ params: { slug } }: { params: { slug
             <section className={styles.details__content}>
                 {newsDetails?.images && <ImageSlider images={newsDetails.images} name='slider' />}
                 <div className={styles.details__upper_content}>
-                    <h1>{newsDetails?.title}</h1>
+                    <title>{newsDetails?.title}</title>
                     <div>
                         {newsDetails?.section && newsDetails?.section.map((section: any, index: number) => {
                             return (

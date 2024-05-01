@@ -1,5 +1,3 @@
-import { NewsType } from "@/types/common";
-
 export async function serverDynamicFetch(query: string) {
     try {
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${query}`, { cache: "no-cache", });

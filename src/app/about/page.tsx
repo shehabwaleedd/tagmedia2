@@ -3,7 +3,34 @@ import styles from "./page.module.scss"
 import Image from 'next/image'
 import OurTeam from '@/components/ourTeam'
 
-const page = () => {
+
+
+export async function generateMetadata() {
+    return {
+        title: "About Tag Media",
+        description: "Tag-Media is one of the marketing and creative consultancy agencies in Egypt and the Middle east. We are working closely with our partners to manage their publicity and social media presence.We build awareness campaigns for our clients that would drive more tra c and engagement.",
+        image: "/assets/covers/about cover.webp",
+        author: "Cairo Studio",
+        date: "2024-05-1",
+        keywords: ["Tag Media", "Tag Media Egypt", "Tag Media Middle East"],
+        url: "https://tagmediaeg.com/about",
+        siteName: "Tag Media",
+        type: "website",
+        openGraph: {
+            type: "website",
+            url: "https://tagmediaeg.com/about",
+            title: "About Tag Media",
+            description: "Tag-Media is one of the marketing and creative consultancy agencies in Egypt and the Middle east. We are working closely with our partners to manage their publicity and social media presence.We build awareness campaigns for our clients that would drive more tra c and engagement.",
+            image: {
+                url: "/assets/covers/about cover.webp",
+                alt: "About Tag Media"
+            }
+        }
+
+    }   
+}
+
+export default async function AboutPage() {
     return (
         <main className={styles.about}>
             <section className={styles.about__container}>
@@ -48,5 +75,3 @@ const page = () => {
         </main>
     )
 }
-
-export default page
