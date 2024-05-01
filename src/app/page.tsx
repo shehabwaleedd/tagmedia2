@@ -7,14 +7,20 @@ import OurTeam from "@/components/ourTeam";
 import ContactHomePage from "@/components/contact"
 import FooterUpper from "@/components/footerUpper"
 import Announcment from "@/animation/marquee/Marquee";
+import MarqueeContent from "@/components/MarqueeContent";
+import { serverDynamicFetch } from '@/lib/serverDynamicFetch'
 
-export default function Home() {
+export default async function Home() {
+  const defaultPartners = await serverDynamicFetch('partner');
+  const defaultPortfolio = await serverDynamicFetch('portfolio');
+
   return (
     <main>
       <Landing />
       <ServicesHomePage />
       <NewsHomePage />
-      <Announcment />
+      <Announcment content={MarqueeContent(defaultPortfolio)} direction={"right"} title="Our Portfolio" />
+      <Announcment content={MarqueeContent(defaultPartners)} direction={"left"} title="Our Partners" />
       <Integration />
       <OurTeam />
       <Integration2 />

@@ -145,9 +145,11 @@
                 border: none;
                 cursor: pointer;
                 transition: var(--animation-primary);
+                border-radius: var(--normal-border-radius);
                 &:hover {
                     transition: var(--animation-primary);
                     background-color: var(--second-accent-color);
+                    color: var(--accent-color);
                 }
             }
         }

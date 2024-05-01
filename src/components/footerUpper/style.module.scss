@@ -25,7 +25,7 @@
             width: 100%;
         }
         h2 {
-            font-size: 3rem;
+            font-size: var(--bigger-font-size);
             font-weight: 700;
             color: var(--background-color);
             text-transform: uppercase;
@@ -39,7 +39,7 @@
             }
         }
         a {
-            font-size: 1.4rem;
+            font-size: 1rem;
             font-weight: 600;
             background-color: var(--second-accent-color);
             padding: 1rem 2rem;
@@ -48,6 +48,13 @@
             text-decoration: none;
             text-align: center;
             width: fit-content;
+            transition: var(--animation-primary);
+            cursor: pointer;
+            &:hover {
+                transition: var(--animation-primary);
+                background-color: var(--accent-color);
+                color: var(--second-accent-color);
+            }
 
             @media (max-width: 568px) {
                 font-size: 1rem;
