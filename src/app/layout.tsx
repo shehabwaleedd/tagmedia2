@@ -7,7 +7,6 @@ import { AuthProvider } from "@/context/AuthContext";
 type Metadata = {
   title: string;
   description: string;
-  themeColor: string;
   openGraph: {
     title: string;
     description: string;
@@ -56,7 +55,6 @@ export const viewport = {
 export const metadata: Metadata = {
   title: "Tag Media",
   description: "Tag Media is Egypt's pioneer in digital and influencer marketing. We transform brands to power growth.",
-  themeColor: "#000000",
   openGraph: {
     title: "Tag Media",
     description: "Tag Media is Egypt's pioneer in digital and influencer marketing. We transform brands to power growth.",

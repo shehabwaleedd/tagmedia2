@@ -10,7 +10,6 @@ import Link from 'next/link';
 const NewsCard: React.FC<{ news: NewsType }> = ({ news }) => {
 
     const router = useRouter();
-    const slugTitle = news?.title?.replace(/ /g, '-').toLowerCase();
 
 
     if (!news) {
@@ -24,16 +23,16 @@ const NewsCard: React.FC<{ news: NewsType }> = ({ news }) => {
 
 
 
-    const handleTourClick = (title: string) => {
-        router.push(`/news/${title}`);
+    const handleTourClick = (slug: string) => {
+        router.push(`/news/${slug}`);
     }
 
 
 
     return (
-        <div className={styles.news__container_card} onClick={() => handleTourClick(slugTitle)}>
+        <div className={styles.news__container_card} onClick={() => handleTourClick(news?.slug)}>
             <div className={styles.image}>
-                <Image src={news?.mainImg?.url} alt={news.title} width={500} height={500} />
+                <Image src={news?.mainImg?.url} alt={news.title} width={500} height={250} sizes="(min-width: 1040px) calc(30vw - 35px), (min-width: 780px) 41.25vw, 90vw" />
 
             </div>
             <div className={styles.bottom}>
@@ -49,7 +48,7 @@ const NewsCard: React.FC<{ news: NewsType }> = ({ news }) => {
                             Tag Media
                         </p>
                     </div>
-                    <button onClick={() => handleTourClick(slugTitle)}>Read More</button>
+                    <button onClick={() => handleTourClick(news?.slug)}>Read More</button>
                 </div>
             </div>
         </div>

@@ -39,14 +39,42 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [error, setError] = useState<string>('');
     const router = useRouter();
 
+    const checkAuth = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            setLoading(false);
+            setIsLoggedIn(false);
+            setError('No token found');
+            return;
+        }
+
+        try {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/user/verify`, {
+                headers: { token }
+            });
+
+            if (response.data.message === "success") {
+                setIsLoggedIn(true);
+            } else {
+                localStorage.removeItem('token');
+                setIsLoggedIn(false);
+                setError('Authentication failed');
+            }
+        } catch (error: any) {
+            console.error('Authentication error:', error);
+            localStorage.removeItem('token');
+            setIsLoggedIn(false);
+            setError(error.message || 'Unknown authentication error');
+        }
+        setLoading(false);
+    };
+
     useEffect(() => {
         const token = localStorage.getItem('token');
-        setIsLoggedIn(!!token)
+        if (token) {
+            checkAuth();
+        }
     }, []);
-
-
-
-
 
 
     const handleLoginSuccess = (token: string) => {
@@ -56,11 +84,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         router.push('/account');
     };
 
-    const handleLoginSuccessForm = (token: string) => {
-        localStorage.setItem('token', token);
-        localStorage.setItem('hasAnimationShown', 'true');
-        setIsLoggedIn(true);
-    };
+
 
     const handleLogout = () => {
         const clearLocalStorageItems = () => {
@@ -83,7 +107,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         hasAnimationShown,
         setHasAnimationShown,
         error,
-        handleLoginSuccessForm,
     }), [isLoggedIn, loading, error]);
 
     return (

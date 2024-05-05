@@ -10,7 +10,7 @@ import axios from 'axios'
 const DashboardNews = ({ news, loading, title }) => {
     const router = useRouter();
     const handleEditClick = (eventId) => {
-        router.push(`/account/edit/blog/${eventId}`);
+        router.push(`/account/edit/news/${eventId}`);
     };
 
     const handleDeleteClick = async (eventId) => {

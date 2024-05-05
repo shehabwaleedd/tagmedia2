@@ -4,27 +4,28 @@ import Image from 'next/image'
 import OurTeam from '@/components/ourTeam'
 
 
-
 export async function generateMetadata() {
     return {
         title: "About Tag Media",
         description: "Tag-Media is one of the marketing and creative consultancy agencies in Egypt and the Middle east. We are working closely with our partners to manage their publicity and social media presence.We build awareness campaigns for our clients that would drive more tra c and engagement.",
-        image: "/assets/covers/about cover.webp",
+        images: "/assets/covers/about cover.webp",
         author: "Cairo Studio",
         date: "2024-05-1",
         keywords: ["Tag Media", "Tag Media Egypt", "Tag Media Middle East"],
-        url: "https://tagmediaeg.com/about",
+        url: "https://tagmedia.me/about",
         siteName: "Tag Media",
         type: "website",
         openGraph: {
             type: "website",
-            url: "https://tagmediaeg.com/about",
+            url: "https://tagmedia.me/about",
             title: "About Tag Media",
             description: "Tag-Media is one of the marketing and creative consultancy agencies in Egypt and the Middle east. We are working closely with our partners to manage their publicity and social media presence.We build awareness campaigns for our clients that would drive more tra c and engagement.",
-            image: {
-                url: "/assets/covers/about cover.webp",
-                alt: "About Tag Media"
-            }
+            images: "/assets/covers/about cover.webp",
+        },
+        twitter: {
+            title: "About Tag Media",
+            description: "Tag-Media is one of the marketing and creative consultancy agencies in Egypt and the Middle east. We are working closely with our partners to manage their publicity and social media presence.We build awareness campaigns for our clients that would drive more tra c and engagement.",
+            images: "/assets/covers/about cover.webp",
         }
 
     }   

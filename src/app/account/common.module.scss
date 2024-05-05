@@ -216,3 +216,13 @@
     color: #721c24;
     background-color: #f8d7da;
 }
+
+.selected {
+    transition: var(--animation-primary);
+    background-color: var(--title-color);
+    border-radius: 1rem;
+
+    label {
+        color: var(--background-color);
+    }
+}

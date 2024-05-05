@@ -1,25 +1,50 @@
 ''
 import React from 'react';
 import Image from 'next/image';
-import { serverUseNewsByTitle } from '@/lib/news/serverUseNewsByTitle';
+import { serverDynamicFetch } from '@/lib/serverDynamicFetch';
 import styles from "./page.module.scss";
 import Link from 'next/link';
 import ImageSlider from '@/components/imageSlider/ImageSlider';
 import UnifiedNewsComponent from '../components/unifiedNewsComponent';
 
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+    const query = `blog/${decodeURIComponent(params.slug)}`;
+    const newsDetails = await serverDynamicFetch(query);
+    if (!newsDetails) {
+        return null;
+    }
 
-export default async function NewsDetails({ params: { slug } }: { params: { slug: string } }) {
+    return {
+        title: newsDetails.title,
+        description: newsDetails.description,
+        images: newsDetails?.images[0]?.url || "/assets/covers/news cover 2.webp",
+        url: `https://tagmedia.me/news/${params.slug}`,
+        type: "article",
+        openGraph: {
+            type: "article",
+            url: `https://tagmedia.me/news/${params.slug}`,
+            title: newsDetails.title,
+            description: newsDetails.description,
+            images: newsDetails?.images[0]?.url || "/assets/covers/news cover 2.webp",
+        },
+        twitter: {
+            title: newsDetails.title,
+            description: newsDetails.description,
+            images: newsDetails?.images[0]?.url || "/assets/covers/news cover 2.webp",
+            url: `https://tagmedia.me/news/${params.slug}`,
+        }
+    }
 
-    const unslugify = (text: string) => {
-        return text
-            .replace(/-/g, ' ')
-            .replace(/\w\S*/g, (word) => word.charAt(0).toUpperCase() + word.substr(1).toLowerCase());  // Capitalize the first letter of each word
-    };
+}
 
-    const title = unslugify(slug);
-    const newsDetails = await serverUseNewsByTitle(title);
-    console.log(newsDetails, "news Details")
 
+export default async function NewsDetails({ params }: { params: { slug: string } }) {
+    const query = `blog/${decodeURIComponent(params.slug)}`;
+    const newsDetails = await serverDynamicFetch(query);
+    console.log(newsDetails, "data", query, "qiuery")
+    if (!newsDetails) {
+        return null;
+    }
 
     return (
         <main className={styles.details}>

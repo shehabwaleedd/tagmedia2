@@ -12,6 +12,12 @@ export interface NewsType {
     createdAt: string;
     tags: string[];
     section: Section[];
+    slug: string;
+    data?: any
+}
+
+export interface NewsDataType {
+    data? : NewsType[]
 }
 
 export interface Section {
@@ -24,6 +30,8 @@ export interface Section {
 export interface MainImg {
     url: string;
     public_id: string;
+    file?: File | Blob;
+    previewUrl?: string | null;
 }
 
 
