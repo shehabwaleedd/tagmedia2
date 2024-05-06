@@ -45,10 +45,10 @@ export interface FormValues {
     section: OptionDetails[];
     date: string;
     [key: string]: unknown;
-    seoTitle: string;
-    seoDescription: string;
-    seoImage: File | null;
-    seoKeywords: string[]
+    seoTitle?: string | null;
+    seoDescription?: string | null;
+    seoImage?: File | null;
+    seoKeywords?: string[] | null
 }
 
 export interface CustomFieldProps {

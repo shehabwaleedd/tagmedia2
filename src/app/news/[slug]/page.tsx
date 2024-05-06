@@ -14,24 +14,31 @@ export async function generateMetadata({ params }: { params: { slug: string } })
         return null;
     }
 
+    const title = newsDetails?.seoTitle
+    const description = newsDetails?.seoDescription
+    const images = newsDetails?.seoImage.url || "/assets/covers/news cover 2.webp"
+    const keywords = newsDetails?.seoKeywords
+    const url = `https://tagmedia.me/news/${params.slug}`
+
     return {
-        title: newsDetails.title,
-        description: newsDetails.description,
-        images: newsDetails?.images[0]?.url || "/assets/covers/news cover 2.webp",
-        url: `https://tagmedia.me/news/${params.slug}`,
+        title,
+        description,
+        images,
+        keywords,
+        url,
         type: "article",
         openGraph: {
             type: "article",
-            url: `https://tagmedia.me/news/${params.slug}`,
-            title: newsDetails.title,
-            description: newsDetails.description,
-            images: newsDetails?.images[0]?.url || "/assets/covers/news cover 2.webp",
+            url,
+            title,
+            description,
+            images,
         },
         twitter: {
-            title: newsDetails.title,
-            description: newsDetails.description,
-            images: newsDetails?.images[0]?.url || "/assets/covers/news cover 2.webp",
-            url: `https://tagmedia.me/news/${params.slug}`,
+            title,
+            description,
+            images,
+            url,
         }
     }
 

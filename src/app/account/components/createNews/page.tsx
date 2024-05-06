@@ -115,7 +115,7 @@ const CreateNews = () => {
                             </div>
                             <div className={styles.group}>
                                 <ReactQuillField name="subTitle" label="Subtitle" value={values.subTitle} onChange={setFieldValue} />
-                                <ReactQuillField name="seoDescription" label="SEO Description" value={values.seoDescription} onChange={setFieldValue} />
+                                <ReactQuillField name="seoDescription" label="SEO Description" value={values.seoDescription ?? ''} onChange={setFieldValue} />
                             </div>
                             <div className={styles.checkboxField}>
                                 <ImageUploader mainImg={mainImg} setMainImg={setMainImg} title='News Main' />
@@ -156,10 +156,7 @@ const CreateNews = () => {
 
 
                             </div>
-                            <div className={styles.formField}>
-                                <CheckboxGroupFieldArray name="tags" options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.tags} />
-                                <CheckboxGroupFieldArray name='seoKeywords' options={keywordOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.seoKeywords} />
-                            </div>
+                            <CheckboxGroupFieldArray name='seoKeywords' options={keywordOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.seoKeywords ?? []} />
                             <div className={styles.checkboxField}>
                                 <CustomField name="category" label="Category" fieldType="select" options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} />
                                 <input type="date" name="date" value={values.date} onChange={(e) => setFieldValue('date', e.target.value)} />
