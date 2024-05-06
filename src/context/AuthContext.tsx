@@ -4,6 +4,9 @@ import React, { createContext, useContext, useMemo, useState, useEffect, ReactNo
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { User } from '@/types/hooks';
+import Cookies from 'js-cookie';
+import { cookies } from 'next/headers';
+
 
 interface AuthContextType {
     error: string;
@@ -39,45 +42,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [error, setError] = useState<string>('');
     const router = useRouter();
 
-    const checkAuth = async () => {
-        const token = localStorage.getItem('token');
-        if (!token) {
-            setLoading(false);
-            setIsLoggedIn(false);
-            setError('No token found');
-            return;
-        }
 
-        try {
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/user/verify`, {
-                headers: { token }
-            });
-
-            if (response.data.message === "success") {
-                setIsLoggedIn(true);
-            } else {
-                localStorage.removeItem('token');
-                setIsLoggedIn(false);
-                setError('Authentication failed');
-            }
-        } catch (error: any) {
-            console.error('Authentication error:', error);
-            localStorage.removeItem('token');
-            setIsLoggedIn(false);
-            setError(error.message || 'Unknown authentication error');
-        }
-        setLoading(false);
-    };
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            checkAuth();
-        }
-    }, []);
 
 
     const handleLoginSuccess = (token: string) => {
+        Cookies.set('token', token, { expires: 7 }); 
         localStorage.setItem('token', token);
         localStorage.setItem('hasAnimationShown', 'true');
         setIsLoggedIn(true);
@@ -88,8 +57,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const handleLogout = () => {
         const clearLocalStorageItems = () => {
-            localStorage.removeItem('token');
+            Cookies.remove('token');
             localStorage.removeItem('hasAnimationShown');
+            localStorage.removeItem('token');
         };
         const resetAuthStates = () => {
             setIsLoggedIn(false);

@@ -4,7 +4,7 @@ import axios from 'axios'
 import styles from "./page.module.scss"
 import { Field, FieldArray, Formik, Form } from 'formik';
 import { ImageFile, FormValues } from '@/types/createNews';
-import { categoryOptions } from './components/presets';
+import { categoryOptions, keywordOptions } from './components/presets';
 import CheckboxGroupFieldArray from './components/ChecboxGroupFieldArray';
 import CustomField from './components/CustomField';
 import ImageUploader from './components/ImageUploader';
@@ -20,7 +20,11 @@ const initialValues: FormValues = {
     category: '',
     tags: [],
     date: '',
-    author: ''
+    author: '',
+    seoTitle: '',
+    seoDescription: '',
+    seoImage: null,
+    seoKeywords: [],
 };
 
 
@@ -32,6 +36,7 @@ const CreateNews = () => {
     const [success, setSuccess] = useState<boolean>(false);
     const [uploadedImages, setUploadedImages] = useState<ImageFile[]>([]);
     const [mainImg, setMainImg] = useState<File | null>(null);
+    const [seoImage, setSeoImage] = useState<File | null>(null)
 
     const handleSubmit = async (values: any, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         const token = localStorage.getItem("token");
@@ -104,36 +109,47 @@ const CreateNews = () => {
                 {({ values, isSubmitting, setFieldValue }) => (
                     <section className={styles.createTour__container}>
                         <Form className={styles.createTour__container_content}>
-                            <CustomField name="title" setFieldValue={setFieldValue} label='title' fieldType="input" />
-                            <ReactQuillField name="subTitle" label="Subtitle" value={values.subTitle} onChange={setFieldValue} />
-                            <ImageUploader mainImg={mainImg} setMainImg={setMainImg} title='News Main'/>
-                            <ImagesUploader uploadedImages={uploadedImages} setUploadedImages={setUploadedImages} />
-                            <div className={styles.formField}>
+                            <div className={styles.group}>
+                                <CustomField name="title" setFieldValue={setFieldValue} label='title' fieldType="input" />
+                                <CustomField name="seoTitle" setFieldValue={setFieldValue} label='SEO Title' fieldType="input" />
+                            </div>
+                            <div className={styles.group}>
+                                <ReactQuillField name="subTitle" label="Subtitle" value={values.subTitle} onChange={setFieldValue} />
+                                <ReactQuillField name="seoDescription" label="SEO Description" value={values.seoDescription} onChange={setFieldValue} />
+                            </div>
+                            <div className={styles.checkboxField}>
+                                <ImageUploader mainImg={mainImg} setMainImg={setMainImg} title='News Main' />
+                                <ImagesUploader uploadedImages={uploadedImages} setUploadedImages={setUploadedImages} />
+                                <ImageUploader mainImg={seoImage} setMainImg={setSeoImage} title='SEO Image' />
+                            </div>
+                            <div className={styles.checkboxField} style={{ padding: "1rem" }}>
                                 <FieldArray name="section">
                                     {({ insert, remove, push }) => (
-                                        <div>
+                                        <div className={styles.groupCheckboxes} >
                                             {values.section.map((section, index) => (
-                                                <div key={index}>
+                                                <div key={index} style={{ border: "1px solid var(--border-color)", borderRadius: "1rem", padding: "0.4rem" }}>
                                                     <Field name={`section.${index}.title`} placeholder="Section Title" />
                                                     <Field name={`section.${index}.subTitle`} placeholder="Section Subtitle" />
                                                     <Field as="textarea" name={`section.${index}.description`} placeholder="Description" />
 
-                                                    <button type="button" onClick={() => remove(index)}>
-                                                        Remove
-                                                    </button>
+                                                    <div className={styles.spaceBetween}>
+                                                        <button type="button" onClick={() => remove(index)}>
+                                                            Remove
+                                                        </button>
+                                                        <button
+                                                            type="button"
+                                                            onClick={(e) => {
+                                                                e.preventDefault(); // Prevent default form submit action
+                                                                console.log("Adding new section before push");
+                                                                push({ title: '', subTitle: '', description: '' });
+                                                                console.log("Adding new section after push");
+                                                            }}
+                                                        >
+                                                            Add Section
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             ))}
-                                            <button
-                                                type="button"
-                                                onClick={(e) => {
-                                                    e.preventDefault(); // Prevent default form submit action
-                                                    console.log("Adding new section before push");
-                                                    push({ title: '', subTitle: '', description: '' });
-                                                    console.log("Adding new section after push");
-                                                }}
-                                            >
-                                                Add Section
-                                            </button>
                                         </div>
                                     )}
                                 </FieldArray>
@@ -142,11 +158,13 @@ const CreateNews = () => {
                             </div>
                             <div className={styles.formField}>
                                 <CheckboxGroupFieldArray name="tags" options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.tags} />
+                                <CheckboxGroupFieldArray name='seoKeywords' options={keywordOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.seoKeywords} />
                             </div>
-                            <CustomField name="category" label="Category" fieldType="select" options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} />
-                            <input type="date" name="date" value={values.date} onChange={(e) => setFieldValue('date', e.target.value)} />
-                            {/* Author   Field*/}
-                            <CustomField name="author" setFieldValue={setFieldValue} label='author' fieldType="input" />
+                            <div className={styles.checkboxField}>
+                                <CustomField name="category" label="Category" fieldType="select" options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} />
+                                <input type="date" name="date" value={values.date} onChange={(e) => setFieldValue('date', e.target.value)} />
+                                <CustomField name="author" setFieldValue={setFieldValue} label='author' fieldType="input" />
+                            </div>
                             {error && <p className={styles.error}>{error}</p>}
                             <button type="submit" className={styles.submitButton} disabled={isSubmitting || loading}>
                                 {loading ? 'Submitting...' : 'Submit'}

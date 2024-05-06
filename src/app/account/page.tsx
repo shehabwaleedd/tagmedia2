@@ -16,11 +16,6 @@ const Account = () => {
     const [activeSection, setActiveSection] = useState<string>('');
     const router = useRouter();
 
-    useEffect(() => {
-        if (!isLoggedIn) {
-            router.push('/login');
-        }
-    }, [isLoggedIn])
 
     const handleOpen = (sectionName: string) => () => {
         setActiveSection(sectionName);

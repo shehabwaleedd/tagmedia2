@@ -28,6 +28,7 @@ const OurTeam = () => {
 
 
     return (
+
         <section className={styles.team}>
             <div className={styles.team__upper}>
                 <h2> Our Team </h2>

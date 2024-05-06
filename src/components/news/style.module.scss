@@ -78,7 +78,7 @@
 
 .swiper {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,4 +89,8 @@
     @media (max-width: 768px) {
         padding: 0;
     }
+}
+
+.swiper__slide {
+    height: auto;
 }

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 500px;
     justify-content: flex-start;
     background-color: var(--container-color);
     border: 1px solid var(--border-color);
@@ -11,6 +12,7 @@
     cursor: pointer;
     position: relative;
     z-index: 9;
+    align-self: stretch;
 
     .image {
         position: relative;
