@@ -3,7 +3,7 @@
     flex-direction: column;
     width: 100%;
     padding: 10vh 0;
-
+    gap: 3rem;
     h2 {
         font-size: 3rem;
         font-weight: 700;
@@ -37,7 +37,7 @@
         justify-content: flex-end;
         align-items: flex-end;
         gap: 2rem;
-        width: 100%;
+        width: 90%;
         height: 100%;
         padding: 2rem;
 
@@ -45,6 +45,7 @@
             padding: 0;
             padding-top: 4vh;
             gap: 1rem;
+            width: 100%;
         }
 
         button {
@@ -72,6 +73,32 @@
 
             }
         }
+    }
+
+    .moreNews {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        padding-bottom: 0;
+        span {
+            text-align: center;
+            font-size: 1rem;
+            font-family: var(--body-font);
+            color: var(--title-color);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 1rem;
+            &:hover {
+                background-color: var(--second-accent-color);
+                color: var(--accent-color);
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+
     }
 }
 

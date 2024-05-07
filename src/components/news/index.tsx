@@ -5,6 +5,10 @@ export default async function NewsHomePage() {
 
     const news = await serverUseNews();
 
+    const spliceNews = news?.splice(0, 6);
+
+
+
     if (!news) {
         return null;
     }
@@ -12,7 +16,7 @@ export default async function NewsHomePage() {
 
     return (
         <section className={styles.newsHomePage}>
-            <SwiperNews news={news} />
+            <SwiperNews news={spliceNews} />
         </section>
     )
 }

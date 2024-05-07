@@ -11,6 +11,7 @@ import { Swiper as SwiperType } from 'swiper';
 import { NewsType } from '@/types/common';
 import NewsCard from '../card';
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
+import Link from 'next/link';
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -36,7 +37,7 @@ const SwiperNews = (
 
 
     return (
-        <div>
+        <div className={styles.newsHomePage}>
             <div className={styles.newsHomePage__upper}>
                 <h2>Our News</h2>
                 <div className={styles.newsHomePage_btns}>
@@ -77,6 +78,9 @@ const SwiperNews = (
                     </SwiperSlide>
                 ))}
             </Swiper>
+            <Link href="/news" aria-label="View More News" className={styles.moreNews}>
+                <span className={styles.newsHomePage__btn}>View More News</span>
+            </Link>
         </div>
     )
 }
