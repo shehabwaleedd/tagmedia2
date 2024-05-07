@@ -11,9 +11,14 @@ export interface NewsType {
     author: string;
     createdAt: string;
     tags: string[];
-    section: Section[];
+    sections: Section[];
     slug: string;
-    data?: any
+    data?: any;
+    seoTitle?: string | null;
+    seoDescription?: string | null;
+    seoImage?: MainImg | null;
+    seoKeywords?: string[] | null
+
 }
 
 export interface NewsDataType {
@@ -24,6 +29,8 @@ export interface Section {
     title: string
     subTitle: string
     description: string
+    image: MainImg;
+    _id?: string;
 }
 
 

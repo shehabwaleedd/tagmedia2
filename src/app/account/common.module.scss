@@ -226,3 +226,23 @@
         color: var(--background-color);
     }
 }
+
+
+.wrap {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    height: 100%;
+    flex-wrap: wrap;
+    label,
+    input {
+        width: 100%;
+    }
+
+
+    @media (max-width: 557px) {
+        flex-direction: column;
+    }
+}
