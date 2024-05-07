@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 
     const handleLoginSuccess = (token: string) => {
-        Cookies.set('token', token, { expires: 7 }); 
+        Cookies.set('token', token, { expires: new Date(new Date().getTime() + 30 * 60 * 1000)});   
         localStorage.setItem('token', token);
         localStorage.setItem('hasAnimationShown', 'true');
         setIsLoggedIn(true);

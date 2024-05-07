@@ -16,7 +16,7 @@ const initialValues: FormValues = {
     subTitle: '',
     mainImg: null,
     images: [],
-    section: [{ title: '', subTitle: '', description: '' }],
+    sections: [{ title: '', subTitle: '', description: '', image: null }],
     category: '',
     tags: [],
     date: '',
@@ -45,55 +45,63 @@ const CreateNews = () => {
             return;
         }
 
-        const appendFormData = (key: string, value: any) => {
-            if (value instanceof File) {
-                formData.append(key, value);
-            } else if (Array.isArray(value)) {
-                value.forEach((val, index) => {
-                    if (val instanceof File) {
-                        formData.append(`${key}[${index}]`, val);
-                    } else {
-                        formData.append(`${key}[${index}]`, val);
-                    }
-                });
-            }
-            else {
-                formData.append(key, value);
-            }
-
-        };
-
         const formData = new FormData();
 
-        Object.entries(values).forEach(([key, value]) => {
-            if (key === 'mainImg') {
-                formData.append('mainImg', mainImg || '');
-            } else if (key === 'images') {
-                (value as any[]).forEach((image: any, index: number) => {
-                    formData.append(`images`, image);
-                });
-            } else if (key === 'section') {
-                (value as any[]).forEach((section: any, index: number) => {
-                    Object.entries(section).forEach(([sectionKey, sectionValue]) => {
-                        appendFormData(`section[${index}][${sectionKey}]`, sectionValue);
-                    });
-                });
-            } else {
-                appendFormData(key, value);
-            }
-        });
+
+        formData.append('title', values.title);
+        formData.append('subTitle', values.subTitle);
+        formData.append('category', values.category);
+        formData.append('date', values.date);
+        formData.append('author', values.author);
+        formData.append('seoTitle', values.seoTitle);
+        formData.append('seoDescription', values.seoDescription);
+        if (mainImg) formData.append('mainImg', mainImg);
+        if (seoImage) formData.append('seoImage', seoImage);
+        if (uploadedImages.length > 0) {
+            uploadedImages.forEach((image, index) => {
+                formData.append(`images`, image.file);
+            });
+        }
+        values.seoKeywords.forEach((keyword: string) => formData.append('seoKeywords', keyword));
+        values.tags.forEach((tag: string) => formData.append('tags', tag));
+
 
         try {
             setLoading(true);
-            const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/blog`, formData, {
-                headers: {
-                    token,
-                    'Content-Type': 'multipart/form-data'
-                },
+            const blogResponse = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/blog`, formData, {
+                headers: { token, 'Content-Type': 'multipart/form-data' },
             });
-            if (response.data.message === "success") {
+
+            if (blogResponse.data.message === "Success") {
+                const blogId = blogResponse.data.data._id;
+                console.log("Blog created successfully, ID:", blogId);
+
+                // Triggering section updates
+                const sectionPromises = values.sections.map(async (section: any, index: number) => {
+                    const sectionFormData = new FormData();
+                    Object.entries(section).forEach(([key, value]) => {
+                        if (value instanceof File) {
+                            sectionFormData.append(key, value, value.name);
+                        } else {
+                            sectionFormData.append(key, value as string);
+                        }
+                    });
+
+                    return axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/section/${blogId}`, sectionFormData, {
+                        headers: { token, 'Content-Type': 'multipart/form-data' },
+                    });
+                });
+
+                const sectionResults = await Promise.all(sectionPromises);
+                sectionResults.forEach(result => {
+                    if (result.status === 200) {
+                        console.log('Section uploaded successfully');
+                    } else {
+                        console.error('Section upload failed', result.data);
+                    }
+                });
+
                 setSuccess(true);
-                console.log("Success");
             }
         } catch (error: any) {
             setError(error.response?.data?.message || error.response?.err);
@@ -126,11 +134,19 @@ const CreateNews = () => {
                                 <FieldArray name="section">
                                     {({ insert, remove, push }) => (
                                         <div className={styles.groupCheckboxes} >
-                                            {values.section.map((section, index) => (
+                                            {values.sections.map((section, index) => (
                                                 <div key={index} style={{ border: "1px solid var(--border-color)", borderRadius: "1rem", padding: "0.4rem" }}>
-                                                    <Field name={`section.${index}.title`} placeholder="Section Title" />
-                                                    <Field name={`section.${index}.subTitle`} placeholder="Section Subtitle" />
-                                                    <Field as="textarea" name={`section.${index}.description`} placeholder="Description" />
+                                                    <Field name={`sections.${index}.title`} placeholder="Section Title" />
+                                                    <Field name={`sections.${index}.subTitle`} placeholder="Section Subtitle" />
+                                                    <Field as="textarea" name={`sections.${index}.description`} placeholder="Description" />
+                                                    <input
+                                                        type="file"
+                                                        onChange={(event) => {
+                                                            const file = event.target.files ? event.target.files[0] : null;
+                                                            setFieldValue(`sections.${index}.image`, file);
+                                                        }}
+                                                    />
+                                                    {section.image && <img src={URL.createObjectURL(section.image)} alt="Selected" style={{ width: "100px", height: "100px" }} />}
 
                                                     <div className={styles.spaceBetween}>
                                                         <button type="button" onClick={() => remove(index)}>
@@ -139,10 +155,8 @@ const CreateNews = () => {
                                                         <button
                                                             type="button"
                                                             onClick={(e) => {
-                                                                e.preventDefault(); // Prevent default form submit action
-                                                                console.log("Adding new section before push");
+                                                                e.preventDefault();
                                                                 push({ title: '', subTitle: '', description: '' });
-                                                                console.log("Adding new section after push");
                                                             }}
                                                         >
                                                             Add Section
@@ -157,6 +171,7 @@ const CreateNews = () => {
 
                             </div>
                             <CheckboxGroupFieldArray name='seoKeywords' options={keywordOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.seoKeywords ?? []} />
+                            <CheckboxGroupFieldArray name='tags' options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.tags ?? []} />
                             <div className={styles.checkboxField}>
                                 <CustomField name="category" label="Category" fieldType="select" options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} />
                                 <input type="date" name="date" value={values.date} onChange={(e) => setFieldValue('date', e.target.value)} />

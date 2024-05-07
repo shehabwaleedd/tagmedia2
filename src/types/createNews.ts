@@ -26,7 +26,8 @@ export interface Option {
 export interface OptionDetails {
     title?: string;
     subTitle?: string;
-    description: string;
+    description?: string;
+    image?: File | null
 
 }
 
@@ -42,7 +43,7 @@ export interface FormValues {
     images: File[];
     tags: string[];
     category: string;
-    section: OptionDetails[];
+    sections: OptionDetails[];
     date: string;
     [key: string]: unknown;
     seoTitle?: string | null;
