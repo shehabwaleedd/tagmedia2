@@ -19,7 +19,7 @@ const AllTours = () => {
 
     return (
         <section>
-            <DashboardNews news={news} title="All News" loading={loading} />
+            <DashboardNews news={news ?? []} title="All News" loading={loading} />
             <div className={styles.pagination}>
                 <button onClick={handlePreviousPage} disabled={currentPage <= 1}>Previous</button>
                 <span>Page {currentPage}</span>
