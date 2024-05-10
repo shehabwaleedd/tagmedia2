@@ -8,6 +8,7 @@ const AdminView = ({ handleOpen }) => {
         { value: 'portfolio', label: 'Portfolio' },
         { value: 'workedWith', label: 'Worked With' },
         { value: 'services', label: 'Services' },
+        { value: 'aboutPage', label: 'About Page' },
         { value: 'createNews', label: 'Create News' },
         { value: 'createTeam', label: 'Create Team' },
         { value: 'createPartner', label: 'Create Partner' },

@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import styles from "./page.module.scss"
 import { useAuth } from '@/context/AuthContext';
 import Image from 'next/image';
+import { toast } from "sonner"
 
 const Page = () => {
     const [errorFromDataBase, setErrorFromDataBase] = useState('')
@@ -36,6 +37,7 @@ const Page = () => {
                 const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/user/login`, values);
 
                 if (response.status === 200 && response.data.message === "success") {
+                    toast.success("Login successful, redirecting to dashboard...")
                     handleLoginSuccess(response.data.token);
                 }
             } catch (err) {
@@ -47,20 +49,13 @@ const Page = () => {
                         errorMessage = err.response.data.map(e => e.message || e).join('\n');
                     }
                 }
+                toast.error(errorMessage)
                 setErrorFromDataBase(errorMessage);
             } finally {
                 setIsLoading(false);
             }
         },
     });
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            router.push('/account');
-        }
-    }, [router]);
-
-
 
     return (
         <main className={styles.container}>

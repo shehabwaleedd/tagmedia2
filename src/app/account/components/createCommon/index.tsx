@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Form, Formik, Field, FormikHelpers } from 'formik';
 import CustomField from '../createNews/components/CustomField';
 import * as Yup from 'yup';
+import { toast } from 'sonner';
 
 interface FormValues {
     name: string;
@@ -61,6 +62,9 @@ const CreateCommon: React.FC<{ type: 'partner' | 'workedWith' | 'team' | 'portfo
         if (values.position) {
             formData.append('position', values.position);
         }
+        if (values.description) {
+            formData.append('description', values.description)
+        }
 
         try {
             setLoading(true);
@@ -74,18 +78,20 @@ const CreateCommon: React.FC<{ type: 'partner' | 'workedWith' | 'team' | 'portfo
                 setSuccess(true);
                 setError('')
                 resetForm();
-                setImage(null); // Reset image state as well
-                console.log("Success");
+                setImage(null);
+                toast.success(`${type} is created successfully`)
             }
             else {
                 throw new Error("Failed to create entry");
             }
-        } catch (err) {
+        } catch (err: any) {
             const message = axios.isAxiosError(err) && err.response
-                ? (err.response.data.message || "An unknown error occurred")
+                ? (err.response.data.err || "An unknown error occurred")
                 : "Network error";
             setError(message);
+            toast.error(message);
             setSuccess(false)
+
         } finally {
             setLoading(false);
         }

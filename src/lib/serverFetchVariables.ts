@@ -1,9 +1,9 @@
 import axios from "axios";
 import { toast } from "sonner";
-export async function serverDynamicFetch(query: string) {
+export async function serverFetchVariables() {
     try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/${query}`);
-        const data = res.data.data.result
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/variable`);
+        const data = res.data
         return data
     } catch (error: any) {
         toast.error("Error fetching news:", error);

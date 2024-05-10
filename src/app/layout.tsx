@@ -3,6 +3,7 @@ import Navbar from "@/components/navbar";
 import FooterF from "@/components/footer";
 import WhatsappIcon from "@/components/whatsappIcon";
 import { AuthProvider } from "@/context/AuthContext";
+import { Toaster } from "sonner";
 
 type Metadata = {
   title: string;
@@ -98,6 +99,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Toaster />
         <AuthProvider>
           <Navbar />
           {children}

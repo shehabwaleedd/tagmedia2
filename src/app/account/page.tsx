@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import AdminView from "@/components/accountViews/admin"
 import CreateNews from './components/createNews/page'
 import CreateCommon from './components/createCommon'
+import EditAboutPage from './edit/aboutPage/page'
 
 
 const Account = () => {
@@ -60,6 +61,7 @@ const Account = () => {
                         {activeSection === 'team' && <DisplayEntities type='team' />}
                         {activeSection === 'portfolio' && <DisplayEntities type='portfolio' />}
                         {activeSection === 'services' && <DisplayEntities type='service' />}
+                        {activeSection === 'aboutPage' && <EditAboutPage />}
                         {activeSection === 'news' && <AllTours />}
                         {activeSection === '' && <div className={styles.account__lower_right_default} style={{ padding: "1rem" }}><h2>Select a section to view</h2></div>}
                     </AnimatePresence>

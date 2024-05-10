@@ -127,10 +127,13 @@
                         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
                     }
 
-                    svg {
-                        font-size: 2.1rem;
-                        color: var(--accent-color);
+                    img {
+                        height: 1.5rem;
+                        width: 1.5rem;
+                        object-fit: contain;
+                        border-radius: none;
                         margin-bottom: 1rem;
+                        color: var(--accent-color);
                     }
 
                     h2 {
