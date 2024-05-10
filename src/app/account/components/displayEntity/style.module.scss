@@ -93,16 +93,16 @@
     border-bottom: 1px solid var(--border-color);
 
     button {
-        background-color: var(--accent-color);
-        color: var(--second-accent-color);
+        background-color: var(--second-accent-color);
+        color: var(--accent-color);
         padding: 0.5rem 1rem;
         border-radius: 2rem;
         cursor: pointer;
         transition: var(--animation-primary);
 
         &:hover {
-            background-color: var(--second-accent-color);
-            color: var(--accent-color);
+            background-color: var(--accent-color);
+            color: var(--second-accent-color);
         }
     }
 }

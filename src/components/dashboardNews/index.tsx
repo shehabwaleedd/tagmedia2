@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import styles from "./style.module.scss"
 import Image from 'next/image'
 import { useRouter } from "next/navigation"
@@ -8,17 +7,21 @@ import axios from 'axios'
 import { DragDropContext, Droppable, Draggable, DroppableProvided, DraggableProvided, DropResult } from 'react-beautiful-dnd';
 import Cookies from 'js-cookie'
 import { NewsType } from '@/types/common'
+import useWindowWidth from '@/hooks/useWindowWidth';
 
-const DashboardNews = ({ news, loading, title } : { news: NewsType[]; loading: boolean; title: string; }) => {
+const DashboardNews = ({ news, loading, title }: { news: NewsType[]; loading: boolean; title: string; }) => {
     const router = useRouter();
     const [currentNews, setNews] = useState(news || []);
+    const windowWidth = useWindowWidth();
+    const isMobile = windowWidth !== null && windowWidth < 768;
+
     useEffect(() => {
         setNews(news || []);
     }, [news]);
 
 
-    const handleEditClick = (eventId: string) => {
-        router.push(`/account/edit/news/${eventId}`);
+    const handleEditClick = (slug: string) => {
+        router.push(`/account/edit/news/${slug}`);
     };
 
     const onDragEnd = (result: DropResult) => {
@@ -51,7 +54,7 @@ const DashboardNews = ({ news, loading, title } : { news: NewsType[]; loading: b
             try {
                 const response = await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/blog/${eventId}`, {
                     headers: {
-                        token: localStorage.getItem("token"),
+                        token: Cookies.get("token"),
                     },
                 });
 
@@ -91,10 +94,18 @@ const DashboardNews = ({ news, loading, title } : { news: NewsType[]; loading: b
                                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={styles.userTours__container_card}>
                                             <div className={styles.userTours__container_card_top}>
                                                 <Image src={event.mainImg ? event.mainImg.url : "/noimage.png"} alt={event.title} width={500} height={500} quality={100} />
-                                                <h3 className={styles.title}>{event.title}</h3>
-                                            </div> 
+                                                {isMobile ? (
+                                                    <h3 className={styles.title}>
+                                                        {event.title.slice(0, 10)}...
+                                                    </h3>
+                                                ) : (
+                                                    <h3 className={styles.title}>
+                                                        {event.title}
+                                                    </h3>
+                                                )}
+                                            </div>
                                             <div className={styles.btns}>
-                                                <button onClick={() => handleEditClick(event._id)} style={{ backgroundColor: "#2e2e2e", color: "var(--container-color)" }}>
+                                                <button onClick={() => handleEditClick(event.slug)} style={{ backgroundColor: "#2e2e2e", color: "var(--container-color)" }}>
                                                     <span >
                                                         Edit
                                                     </span>

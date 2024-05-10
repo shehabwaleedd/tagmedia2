@@ -18,12 +18,14 @@ interface FormValues {
     tags?: string[];
     category?: string;
     author?: string;
+
 }
 
 interface EditEntityProps {
-    data: FormValues;
+    data: FormValues | any;
     type: string;
     id: string;
+    loading: boolean;
 }
 
 
@@ -88,7 +90,6 @@ const EditEntity: React.FC<EditEntityProps> = ({ data, type, id }) => {
         <main className={styles.editPage}>
             <section className={styles.editPage_upper}>
                 <Link href="/account">Back to account</Link>
-                <h1>Edit {type}</h1>
             </section>
             <section className={styles.editContainer}>
                 <Formik
@@ -102,6 +103,7 @@ const EditEntity: React.FC<EditEntityProps> = ({ data, type, id }) => {
                             <div className={common.group}>
                                 <CustomField name="name" label="Name" fieldType="input" />
                                 {type === 'team' && <CustomField name="position" label="Position" fieldType="input" />}
+                                {type === 'service' &&  <CustomField name="description" label="Description" fieldType="input" />}
                             </div>
                             <ImageUploader
                                 mainImg={image}

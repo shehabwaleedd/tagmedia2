@@ -24,7 +24,7 @@
             align-items: flex-start;
             justify-content: flex-start;
             gap: 1rem;
-            padding-top: 10vh;
+            padding-top: 5vh;
         }
 
         &__section {
@@ -32,6 +32,11 @@
             flex-direction: column;
             gap: 1rem;
             width: 100%;
+
+            @media (max-width: 777px) {
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
 
 
             img {
@@ -121,5 +126,9 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: 1rem
+    gap: 1rem;
+    @media (max-width: 777px) {
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
 }

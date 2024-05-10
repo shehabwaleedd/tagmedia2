@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { DragDropContext, Droppable, Draggable, DroppableProvided, DraggableProvided, DropResult } from 'react-beautiful-dnd';
 import Cookies from 'js-cookie'
+import useWindowWidth from '@/hooks/useWindowWidth';
 
 interface EntityProps {
     type: string;
@@ -29,7 +30,8 @@ const DisplayEntities: React.FC<EntityProps> = ({ type }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [reorderedEntities, setReorderedEntities] = useState<Entity[]>([]);
-
+    const windowWidth = useWindowWidth();
+    const isMobile = windowWidth !== null && windowWidth < 768;
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -75,6 +77,7 @@ const DisplayEntities: React.FC<EntityProps> = ({ type }) => {
             await axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/${type}/order`, orderedItems, {
                 headers: {
                     'Content-Type': 'application/json',
+                    token: Cookies.get("token"),
                 },
             });
             alert('Order saved successfully!');
@@ -92,7 +95,7 @@ const DisplayEntities: React.FC<EntityProps> = ({ type }) => {
         <DragDropContext onDragEnd={onDragEnd}>
             <div className={styles.allEntities}>
                 <div className={styles.upper}>
-                    <h1>{type.charAt(0).toUpperCase() + type.slice(1)}</h1>
+                    <h1> {type.charAt(0).toUpperCase() + type.slice(1) + (type === 'partner' ? 's' : '')}</h1>
                     <button onClick={handleSaveOrder} className={styles.saveButton}>Save Order</button>
                 </div>
                 <Droppable droppableId={`${type}-list`}>
@@ -104,7 +107,7 @@ const DisplayEntities: React.FC<EntityProps> = ({ type }) => {
                                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={styles.allEntities__container__card}>
                                             <div className={styles.allEntities__container__card_top}>
                                                 <Image src={entity.image.url || '/placeholder.png'} alt={entity.name} className={styles.image} width={500} height={500} />
-                                                <p>{entity.name}</p>
+                                                {isMobile ? (<p>{entity.name.slice(0,10)}...</p>) : (<p>{entity.name}</p>)}
                                             </div>
                                             <div className={styles.btns}>
                                                 {type === 'team' && <p>{entity.position}</p>}

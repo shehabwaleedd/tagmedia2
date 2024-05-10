@@ -26,6 +26,7 @@
     "react-share-social": "^0.1.55",
     "react-spinners": "^0.13.8",
     "sass": "^1.72.0",
+    "sonner": "^1.4.41",
     "swiper": "^11.0.7",
     "yup": "^1.4.0"
   },

@@ -11,8 +11,9 @@ import AdminView from "@/components/accountViews/admin"
 import CreateNews from './components/createNews/page'
 import CreateCommon from './components/createCommon'
 
+
 const Account = () => {
-    const {  handleLogout, isLoggedIn } = useAuth();
+    const { handleLogout, isLoggedIn } = useAuth();
     const [activeSection, setActiveSection] = useState<string>('');
     const router = useRouter();
 
@@ -53,10 +54,12 @@ const Account = () => {
                         {activeSection === 'createWorkedWith' && <CreateCommon type='workedWith' />}
                         {activeSection === 'createTeam' && <CreateCommon type='team' />}
                         {activeSection === 'createPortfolio' && <CreateCommon type='portfolio' />}
+                        {activeSection === 'createService' && <CreateCommon type='service' />}
                         {activeSection === 'partners' && <DisplayEntities type='partner' />}
                         {activeSection === 'workedWith' && <DisplayEntities type='workedWith' />}
                         {activeSection === 'team' && <DisplayEntities type='team' />}
                         {activeSection === 'portfolio' && <DisplayEntities type='portfolio' />}
+                        {activeSection === 'services' && <DisplayEntities type='service' />}
                         {activeSection === 'news' && <AllTours />}
                         {activeSection === '' && <div className={styles.account__lower_right_default} style={{ padding: "1rem" }}><h2>Select a section to view</h2></div>}
                     </AnimatePresence>

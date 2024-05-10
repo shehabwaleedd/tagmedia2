@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from "../../page.module.scss";
+import Cookies from 'js-cookie';
 import common from "../../common.module.scss";
 import ImageUploader from '../createNews/components/ImageUploader';
 import axios from 'axios';
@@ -10,10 +10,11 @@ import * as Yup from 'yup';
 interface FormValues {
     name: string;
     image: File | null;
-    position?: string; // Optional for 'team'
+    position?: string;  // optional for team
+    description?: string, // optiomal for service
 }
 
-const CreateCommon: React.FC<{ type: 'partner' | 'workedWith' | 'team' | 'portfolio' }> = ({ type }) => {
+const CreateCommon: React.FC<{ type: 'partner' | 'workedWith' | 'team' | 'portfolio' | 'service' }> = ({ type }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const [success, setSuccess] = useState<boolean>(false);
@@ -22,7 +23,9 @@ const CreateCommon: React.FC<{ type: 'partner' | 'workedWith' | 'team' | 'portfo
     const initialValues: FormValues = {
         name: '',
         image: null,
-        ...(type === 'team' && { position: '' }) // Add position field only for team
+        ...(type === 'team' && { position: '' }),
+        ...(type === 'service' && { description: '' })
+
     };
 
     // Dynamic endpoint based on the type
@@ -30,7 +33,8 @@ const CreateCommon: React.FC<{ type: 'partner' | 'workedWith' | 'team' | 'portfo
         'partner': '/partner',
         'workedWith': '/workedWith',
         'team': '/team',
-        'portfolio': '/portfolio'
+        'portfolio': '/portfolio',
+        'service': '/service'
     }[type];
 
     // Validation Schema including optional position field for team
@@ -43,7 +47,7 @@ const CreateCommon: React.FC<{ type: 'partner' | 'workedWith' | 'team' | 'portfo
     });
 
     const handleSubmit = async (values: FormValues, { resetForm }: FormikHelpers<FormValues>) => {
-        const token = localStorage.getItem("token");
+        const token = Cookies.get("token");
         if (!token) {
             setError("Unauthorized");
             return;
@@ -99,11 +103,12 @@ const CreateCommon: React.FC<{ type: 'partner' | 'workedWith' | 'team' | 'portfo
                 {({ setFieldValue }) => (
                     <Form>
                         <CustomField name="name" label="Name" fieldType="input" />
+                        {type === 'team' && <Field name="position" placeholder="Position" component="input" />}
+                        {type === 'service' && <Field name="description" placeholder="Description" component="textarea" />}
                         <ImageUploader mainImg={image} setMainImg={(file) => {
                             setImage(file);
                             setFieldValue('image', file);
-                        }} title={type} />
-                        {type === 'team' && <Field name="position" placeholder="Position" component="input" />}
+                        }} title={type === "service" ? "Icon" : type} />
                         <button className={common.submitButton} type="submit" disabled={loading}>
                             {loading ? `Creating ${type}...` : `Create ${type}`}
                         </button>

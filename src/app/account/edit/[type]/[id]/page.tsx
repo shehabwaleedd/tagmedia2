@@ -1,16 +1,13 @@
-
-import { serverDynamicFetch } from '@/lib/serverDynamicFetch';
+'use client'
 import EditEntityComponent from './EditEntity';
+import useDynamicFetchClient from '@/lib/useDynamicFetchClient';
 
 
-export default async function EditEntity({ params } : { params: { type: string, id: string },}) {
+export default function EditEntity({ params } : { params: { type: string, id: string },}) {
     const query = `${params.type}/${decodeURIComponent(params.id)}`;
-
-    const data = await serverDynamicFetch(query);
-
-    console.log(query, "query", data, "data")
+    const { data, error, loading } = useDynamicFetchClient(query);
 
     return (
-        <EditEntityComponent data={data} type={params.type} id={params.id}/>
+        <EditEntityComponent data={data} type={params.type} id={params.id} loading={loading}/>
     )
 };

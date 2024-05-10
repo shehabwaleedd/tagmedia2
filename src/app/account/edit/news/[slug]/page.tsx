@@ -129,14 +129,14 @@ const EditNews = () => {
                 seoDescription: news.seoDescription
             });
             setSections(news.sections.map(section => ({
-                title: section.title,
-                subTitle: section.subTitle,
-                description: section.description,
-                image: section.image.url,
-                _id: section._id
+                title: section?.title,
+                subTitle: section?.subTitle,
+                description: section?.description,
+                image: section?.image?.url,
+                _id: section?._id
             })));
-            setMainImgPreview(news.mainImg.url);
-            setImagePreviews(news.images.map(img => img.url));
+            setMainImgPreview(news?.mainImg.url);
+            setImagePreviews(news?.images.map(img => img.url));
         }
         console.log(sections, "sections")
     }, [news]);

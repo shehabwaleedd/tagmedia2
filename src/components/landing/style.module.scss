@@ -50,6 +50,7 @@
 
             @media (max-width: 768px) {
                 top: 50%;
+                gap: 1rem;
             }
 
             h1 {
@@ -61,7 +62,8 @@
                 font-family: var(--bold-font);
 
                 @media (max-width: 768px) {
-                    font-size: 1.6rem;
+                    font-size: 1.4rem;
+                    letter-spacing: normal;
                 }
             }
 
