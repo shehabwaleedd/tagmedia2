@@ -107,7 +107,7 @@ const DisplayEntities: React.FC<EntityProps> = ({ type }) => {
                                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={styles.allEntities__container__card}>
                                             <div className={styles.allEntities__container__card_top}>
                                                 <Image src={entity.image.url || '/placeholder.png'} alt={entity.name} className={styles.image} width={500} height={500} />
-                                                {isMobile ? (<p>{entity.name.slice(0,10)}...</p>) : (<p>{entity.name}</p>)}
+                                                {isMobile ? (<p>{entity.name.slice(0, 10)}...</p>) : (<p>{entity.name}</p>)}
                                             </div>
                                             <div className={styles.btns}>
                                                 {type === 'team' && <p>{entity.position}</p>}

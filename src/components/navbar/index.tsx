@@ -4,10 +4,11 @@ import styles from './style.module.scss'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { TbMenu2 } from "react-icons/tb";
 import Nav from "./nav"
 import { AnimatePresence } from 'framer-motion'
 import { useAuth } from '@/context/AuthContext'
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+
 interface LinkItem {
     href: string;
     label: string;
@@ -58,6 +59,14 @@ const Navbar = () => {
         setMenuOpened(false)
     }, [pathname])
 
+    useEffect(() => {
+        if (menuOpened) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [menuOpened])
+
 
 
 
@@ -69,8 +78,8 @@ const Navbar = () => {
                         <Image
                             src="/logo2.png"
                             alt="logo"
-                            width={100}
-                            height={100}
+                            width={50}
+                            height={50}
                         />
                         <h2>Tag Media</h2>
                     </Link>
@@ -85,7 +94,7 @@ const Navbar = () => {
                     ))}
                 </ul>
                 <div className={styles.hamburger} onClick={toggleMenu}>
-                    <TbMenu2 />
+                    <HiOutlineMenuAlt3 />
                 </div>
                 <AnimatePresence mode="wait">
                     {menuOpened && <Nav setMenuOpened={setMenuOpened} />}

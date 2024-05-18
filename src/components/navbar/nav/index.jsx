@@ -1,6 +1,6 @@
 import styles from './style.module.scss';
 import { motion } from 'framer-motion';
-import { width } from '../anim';
+import { height } from '../anim';
 import Body from './Body';
 
 
@@ -34,7 +34,7 @@ export default function Index({ setMenuOpened }) {
       initial="initial"
       animate="enter"
       exit="exit"
-      variants={width}
+      variants={height}
       className={styles.nav}>
 
       <div className={styles.wrapper}>

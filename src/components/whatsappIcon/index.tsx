@@ -8,7 +8,7 @@ const WhatsappIcon = () => {
     const isAccountPage = usePathname().includes('/account');
     return (
         <section className={styles.whatsapp} style={{ display: isAccountPage ? "none" : "" }}>
-            <a href="whatsapp://send?text=Hello, I want&phone=+201224202031" target="_blank" rel="noreferrer">
+            <a href="whatsapp://send?text=Hello, I want&phone=+201224202031" target="_blank" rel="noreferrer" aria-label="Whatsapp Contact Icon" >
                 <FaWhatsapp />
             </a>
         </section>

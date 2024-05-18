@@ -34,7 +34,7 @@ const index = () => {
                     return (
                         <div key={index} className={styles.ServicesHome__container__service}>
                             <Image src={service.image} alt={service.title} width={100} height={100} />
-                            <h3>{service.title}</h3>
+                            <h2>{service.title}</h2>
                             <p>{service.description}</p>
                         </div>
                     )

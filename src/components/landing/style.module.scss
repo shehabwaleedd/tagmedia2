@@ -19,16 +19,20 @@
         width: 100%;
         position: relative;
         height: 100%;
+        height: 70vh;
+
+        @media (max-width: 555px) {
+            height: 60vh;
+
+        }
 
         img {
             width: 100%;
             margin-bottom: 2rem;
             object-fit: cover;
             clip-path: var(--clip-path);
-            height: 70vh;
 
             @media (max-width: 768px) {
-                height: 70vh;
                 margin-bottom: 0;
                 clip-path: var(--mobile-clip-path) ;
             }

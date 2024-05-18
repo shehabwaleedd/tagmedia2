@@ -5,14 +5,17 @@
     width: 100%;
     z-index: 100;
 
+    @media (max-width: 555px) {
+        height: 5vh;
+    }
+
 
     &__container {
         display: flex;
         width: 100%;
         justify-content: space-between;
-        align-items: center;
         max-width: 90vw;
-        margin: auto;
+        height: 100%;
 
         ul {
             display: flex;
@@ -45,7 +48,7 @@
             a {
                 display: flex;
                 align-items: center;
-                justify-content: flex-start;
+
                 width: 100%;
             }
 
@@ -53,6 +56,12 @@
                 width: 4rem;
                 height: 3rem;
                 object-fit: cover;
+
+                @media (max-width: 555px) {
+                    width: 2rem;
+                    height: 1.5rem;
+                    object-fit: contain;
+                }
             }
 
             h2 {
@@ -62,12 +71,6 @@
                 width: 100%;
             }
 
-            @media (max-width: 555px) {
-                img {
-                    width: 4rem;
-                    height: 3rem;
-                }
-            }
         }
     }
 
@@ -75,8 +78,9 @@
         display: none;
 
         @media (max-width: 555px) {
-            display: block;
-
+            display: inline-block;
+            position: relative;
+            top: -0.1rem;
             svg {
                 color: var(--container-color);
                 font-size: 2rem;

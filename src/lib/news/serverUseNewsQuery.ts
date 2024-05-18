@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { NewsType } from "@/types/common";
 
 let cache: Record<string, NewsType[]> = {};
@@ -14,11 +15,11 @@ export async function serverUseNewsQuery(query: string) {
         if (cache[query]) {
             return cache[query];
         }
-        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/blog?${query}`, { cache: "no-cache", });
-        if (!res.ok) {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/blog?${query}`);
+        if (res.status !== 200) {
             throw new Error(`Failed to fetch tours, status: ${res.status}`);
         }
-        const data = await res.json();
+        const data = res.data;
         // Update cache and set new expiry
         cache[query] = data.data;
         cacheExpiry = Date.now() + 24 * 60 * 60 * 1000;

@@ -7,6 +7,6 @@ export async function serverDynamicFetch(query: string) {
         return data
     } catch (error: any) {
         toast.error("Error fetching news:", error);
-        throw error;
+        return null;
     }
 }

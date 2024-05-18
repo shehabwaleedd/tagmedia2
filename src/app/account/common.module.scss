@@ -22,8 +22,9 @@
     border: 1px solid var(--border-color);
     border-radius: 2rem;
     background-color: var(--container-color);
-    max-width: 80vw;
+    max-width: 90vw;
     margin: 0 auto;
+    margin-top: 6vh;
 
     @media (max-width: 555px) {
         max-width: 95vw;

@@ -173,9 +173,11 @@ const CreateNews = () => {
                             <CheckboxGroupFieldArray name='seoKeywords' options={keywordOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.seoKeywords ?? []} />
                             <CheckboxGroupFieldArray name='tags' options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.tags ?? []} />
                             <div className={styles.checkboxField}>
-                                <CustomField name="category" label="Category" fieldType="select" options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} />
+                                <div className={styles.group}>
+                                    <CustomField name="category" label="Category" fieldType="select" options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} />
+                                    <CustomField name="author" setFieldValue={setFieldValue} label='author' fieldType="input" />
+                                </div>
                                 <input type="date" name="date" value={values.date} onChange={(e) => setFieldValue('date', e.target.value)} />
-                                <CustomField name="author" setFieldValue={setFieldValue} label='author' fieldType="input" />
                             </div>
                             {error && <p className={styles.error}>{error}</p>}
                             <button type="submit" className={styles.submitButton} disabled={isSubmitting || loading}>

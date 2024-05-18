@@ -2,24 +2,32 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
     return {
-        name: 'Tag Media',
-        short_name: 'Tag',
-        description: 'Tag Media - Your one stop for all things news, entertainment, and technology',
+        name: 'Pyramids Egypt Tour',
+        short_name: 'Pyramids Egypt Tour',
+        description: 'Pyramids Egypt Tour',
+        lang: 'en',
         start_url: '/',
         display: 'standalone',
         background_color: '#fff',
-        lang: 'en',
         theme_color: '#fff',
+        scope: '.',
         icons: [
             {
                 src: '/favicon.ico',
-                sizes: 'any',
+                sizes: '16x16 32x32', 
                 type: 'image/x-icon',
             },
             {
                 src: '/android-chrome-192x192.png',
                 sizes: '192x192',
                 type: 'image/png',
+                purpose: 'any'
+            },
+            {
+                src: '/android-chrome-512x512.png', 
+                sizes: '512x512',
+                type: 'image/png',
+                purpose: 'any'  
             },
             {
                 src: '/apple-touch-icon.png',
@@ -36,7 +44,26 @@ export default function manifest(): MetadataRoute.Manifest {
                 sizes: '32x32',
                 type: 'image/png',
             },
+            {
+                src: '/maskable-icon.png',
+                sizes: '196x196',
+                type: 'image/png',
+                purpose: 'maskable',
+            },
+            {
+                src: '/maskable-icon.png',
+                sizes: '512x512',
+                type: 'image/png',
+                purpose: 'maskable',
+            },
+            {
+                src: '/maskable-icon-512x512.png', 
+                sizes: '512x512',
+                type: 'image/png',
+                purpose: 'maskable'
+            },
         ],
+
 
     }
 }

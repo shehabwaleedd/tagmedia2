@@ -74,6 +74,11 @@ const DashboardNews = ({ news, loading, title }: { news: NewsType[]; loading: bo
         return <Loading height={100} />
     }
 
+    if (!currentNews) {
+        return <Loading height={100} />
+
+    }
+
 
 
 
@@ -88,12 +93,19 @@ const DashboardNews = ({ news, loading, title }: { news: NewsType[]; loading: bo
                 <Droppable droppableId="news">
                     {(provided) => (
                         <div {...provided.droppableProps} ref={provided.innerRef} className={styles.userTours__container}>
-                            {currentNews.map((event, index) => (
+                            {Array.isArray(currentNews) && currentNews.map((event, index) => (
                                 <Draggable key={event._id} draggableId={event._id} index={index}>
                                     {(provided) => (
                                         <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={styles.userTours__container_card}>
                                             <div className={styles.userTours__container_card_top}>
-                                                <Image src={event.mainImg ? event.mainImg.url : "/noimage.png"} alt={event.title} width={500} height={500} quality={100} />
+                                                <Image
+                                                    src={event.mainImg.url}
+                                                    alt={event.title}
+                                                    width={500}
+                                                    height={250}
+                                                    sizes="(min-width: 1040px) calc(30vw - 35px), (min-width: 780px) 41.25vw, 90vw"
+                                                    priority
+                                                />
                                                 {isMobile ? (
                                                     <h3 className={styles.title}>
                                                         {event.title.slice(0, 10)}...
