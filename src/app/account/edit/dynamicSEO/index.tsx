@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -128,7 +128,7 @@ const SEOForm = ({ page }: { page: string }) => {
                             <input type="file" name="image" onChange={handleSeoImageChange} />
                             {seoImagePreview && <img src={seoImagePreview} alt="SEO" className={styles.imagePreview} />}
                         </div>
-                    
+
                         <ErrorMessage name="image" component="div" className={styles.error} />
 
                         <button type="submit" disabled={isSubmitting} className={styles.submitButton}>
