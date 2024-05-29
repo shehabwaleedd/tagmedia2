@@ -1,33 +1,28 @@
-'use client'
-import React, { useState, useEffect } from 'react'
-import styles from './style.module.scss'
-import Link from 'next/link'
-import Image from 'next/image'
-import { usePathname } from 'next/navigation'
-import Nav from "./nav"
-import { AnimatePresence } from 'framer-motion'
-import { useAuth } from '@/context/AuthContext'
+'use client';
+import React, { useState, useEffect } from 'react';
+import styles from './style.module.scss';
+import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import Nav from "./nav";
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { useAuth } from '@/context/AuthContext';
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-
-interface LinkItem {
-    href: string;
-    label: string;
-}
 
 type RouteDestinationMap = {
     [key: string]: string;
 };
 
-
 const Navbar = () => {
-    const pathname = usePathname()
+    const pathname = usePathname();
     const [destination, setDestination] = useState<string>('');
     const [menuOpened, setMenuOpened] = useState<boolean>(false);
-    const { isLoggedIn } = useAuth()
+    const { isLoggedIn } = useAuth();
+    const controls = useAnimation();
 
     const toggleMenu = () => {
-        setMenuOpened(!menuOpened)
-    }
+        setMenuOpened(!menuOpened);
+    };
 
     useEffect(() => {
         const pathToDestination: RouteDestinationMap = {
@@ -54,10 +49,9 @@ const Navbar = () => {
         links.push({ href: "/account", label: "Account" });
     }
 
-
     useEffect(() => {
-        setMenuOpened(false)
-    }, [pathname])
+        setMenuOpened(false);
+    }, [pathname]);
 
     useEffect(() => {
         if (menuOpened) {
@@ -65,28 +59,56 @@ const Navbar = () => {
         } else {
             document.body.style.overflow = 'auto';
         }
-    }, [menuOpened])
+    }, [menuOpened]);
 
+    useEffect(() => {
+        let lastScrollY = window.scrollY;
 
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
 
+            if (currentScrollY > lastScrollY) {
+                controls.start({
+                    y: '-20vh',
+                    transition: { duration: 0.35, ease: 'easeInOut' }
+                });
+            } else {
+                controls.start({
+                    y: '0',
+                    transition: { duration: 0.35, ease: 'easeInOut' }
+                });
+            }
+
+            lastScrollY = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [controls]);
 
     return (
-        <nav className={styles.navbar}>
+        <motion.nav
+            className={styles.navbar}
+            animate={controls}
+            initial={{ y: '0' }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+        >
             <header className={styles.navbar__container}>
-                <div className={styles.logo}>
-                    <Link href="/">
-                        <Image
-                            src="/logo2.png"
-                            alt="logo"
-                            width={50}
-                            height={50}
-                        />
-                        <h2>Tag Media</h2>
-                    </Link>
-                </div>
+                <Link href="/" className={styles.logo}>
+                    <Image
+                        src="/logo2.png"
+                        alt="logo"
+                        width={50}
+                        height={50}
+                    />
+                    <h2>Tag Media</h2>
+                </Link>
                 <ul className={styles.links}>
                     {links.map(link => (
-                        <li key={link.href} >
+                        <li key={link.href}>
                             <Link href={link.href} className={pathname === link.href ? styles.activeLink : ''}>
                                 {link.label}
                             </Link>
@@ -94,14 +116,14 @@ const Navbar = () => {
                     ))}
                 </ul>
                 <div className={styles.hamburger} onClick={toggleMenu}>
-                    <HiOutlineMenuAlt3 style={{ opacity: menuOpened ? "0" : "1" }}/>
+                    <HiOutlineMenuAlt3 style={{ opacity: menuOpened ? "0" : "1" }} />
                 </div>
                 <AnimatePresence mode="wait">
                     {menuOpened && <Nav setMenuOpened={setMenuOpened} />}
                 </AnimatePresence>
             </header>
-        </nav>
-    )
-}
+        </motion.nav>
+    );
+};
 
-export default Navbar
+export default Navbar;
