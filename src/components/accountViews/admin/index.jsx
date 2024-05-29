@@ -2,40 +2,63 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaNewspaper, FaUsers, FaHandshake, FaBriefcase, FaTv, FaTools, FaSearch } from 'react-icons/fa';
+import styles from '@/app/account/page.module.scss'; // Import your styles
 
 const AdminView = ({ handleOpen }) => {
     const categories = {
-        News: [
-            { value: 'news', label: 'Manage News' },
-            { value: 'createNews', label: 'Create News' },
-        ],
-        Teams: [
-            { value: 'team', label: 'Manage Teams' },
-            { value: 'createTeam', label: 'Create Team' },
-        ],
-        Partners: [
-            { value: 'partners', label: 'Manage Partners' },
-            { value: 'createPartner', label: 'Create Partner' },
-        ],
-        Portfolio: [
-            { value: 'portfolio', label: 'Manage Portfolio' },
-            { value: 'createPortfolio', label: 'Create Portfolio' },
-        ],
-        Series: [
-            { value: 'workedWith', label: 'Manage Series' },
-            { value: 'createWorkedWith', label: 'Create Worked With' },
-        ],
-        Services: [
-            { value: 'services', label: 'Manage Services' },
-            { value: 'createService', label: 'Create Service' },
-        ],
-        SEO: [
-            { value: 'aboutPageSEO', label: 'About Page SEO' },
-            { value: 'homePageSEO', label: 'Home Page SEO' },
-            { value: 'servicesPageSEO', label: 'Services Page SEO' },
-            { value: 'contactPageSEO', label: 'Contact Page SEO' },
-            { value: 'newsPageSEO', label: 'News Page SEO' },
-        ]
+        News: {
+            icon: <FaNewspaper />,
+            options: [
+                { value: 'news', label: 'Manage News' },
+                { value: 'createNews', label: 'Create News' },
+            ],
+        },
+        Teams: {
+            icon: <FaUsers />,
+            options: [
+                { value: 'team', label: 'Manage Teams' },
+                { value: 'createTeam', label: 'Create Team' },
+            ],
+        },
+        Partners: {
+            icon: <FaHandshake />,
+            options: [
+                { value: 'partners', label: 'Manage Partners' },
+                { value: 'createPartner', label: 'Create Partner' },
+            ],
+        },
+        Portfolio: {
+            icon: <FaBriefcase />,
+            options: [
+                { value: 'portfolio', label: 'Manage Portfolio' },
+                { value: 'createPortfolio', label: 'Create Portfolio' },
+            ],
+        },
+        Series: {
+            icon: <FaTv />,
+            options: [
+                { value: 'workedWith', label: 'Manage Series' },
+                { value: 'createWorkedWith', label: 'Create Worked With' },
+            ],
+        },
+        Services: {
+            icon: <FaTools />,
+            options: [
+                { value: 'services', label: 'Manage Services' },
+                { value: 'createService', label: 'Create Service' },
+            ],
+        },
+        SEO: {
+            icon: <FaSearch />,
+            options: [
+                { value: 'aboutPageSEO', label: 'About Page SEO' },
+                { value: 'homePageSEO', label: 'Home Page SEO' },
+                { value: 'servicesPageSEO', label: 'Services Page SEO' },
+                { value: 'contactPageSEO', label: 'Contact Page SEO' },
+                { value: 'newsPageSEO', label: 'News Page SEO' },
+            ],
+        },
     };
 
     const [expanded, setExpanded] = useState(null);
@@ -50,9 +73,14 @@ const AdminView = ({ handleOpen }) => {
 
     return (
         <div>
-            {Object.entries(categories).map(([category, options]) => (
+            {Object.entries(categories).map(([category, { icon, options }]) => (
                 <div key={category}>
-                    <h2 onClick={() => toggleCategory(category)} style={{ cursor: 'pointer', padding: '8px' }}>
+                    <h2 
+                        onClick={() => toggleCategory(category)} 
+                        className={expanded === category ? styles.selectedCategory : ''} 
+                        style={{ cursor: 'pointer', padding: '8px', display: 'flex', alignItems: 'center' }}
+                    >
+                        <span style={{ marginRight: '8px' }}>{icon}</span>
                         {category}
                     </h2>
                     <AnimatePresence>

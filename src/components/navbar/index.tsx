@@ -53,7 +53,7 @@ const Navbar = () => {
     if (isLoggedIn) {
         links.push({ href: "/account", label: "Account" });
     }
-    
+
 
     useEffect(() => {
         setMenuOpened(false)
@@ -94,7 +94,7 @@ const Navbar = () => {
                     ))}
                 </ul>
                 <div className={styles.hamburger} onClick={toggleMenu}>
-                    <HiOutlineMenuAlt3 />
+                    <HiOutlineMenuAlt3 style={{ opacity: menuOpened ? "0" : "1" }}/>
                 </div>
                 <AnimatePresence mode="wait">
                     {menuOpened && <Nav setMenuOpened={setMenuOpened} />}
