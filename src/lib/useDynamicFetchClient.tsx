@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-interface DataType {
+export interface DataType {
     name: string;
     image: {
         url: string;

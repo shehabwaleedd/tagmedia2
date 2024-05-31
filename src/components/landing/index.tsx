@@ -10,6 +10,7 @@ export default function Landing() {
                     src="/assets/covers/home cover.webp"
                     alt="Landing"
                     layout="fill"
+                    priority={true}
                 />
                 <div className={styles.landing__container__content}>
                     <h1>Welcome to the Tag</h1>

@@ -13,7 +13,6 @@
         letter-spacing: 0.05rem;
         position: relative;
         text-align: center;
-        margin-bottom: 2rem;
 
         @media (max-width: 768px) {
             font-size: 1.6rem;
@@ -30,48 +29,10 @@
         h2 {
             flex-grow: 1;
             text-align: center;
-            position: absolute; // Allows fine-tuning of the position
-            left: 50%; // Centers h2 relative to parent
-            transform: translateX(-50%); // Adjusts for element width
         }
     }
 
-    &_btns {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 2rem;
-        height: 100%;
-        padding: 2rem;
-
-        width: 100%;
-        @media (max-width: 777px) {
-            padding: 0;
-            align-items: center;
-            gap: 1rem;
-            width: fit-content;
-        }
-
-        button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-            font-size: 2rem;
-            font-family: var(--title-font);
-            background-color: transparent;
-            border: 1px solid var(--container-color);
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer;
-
-            svg {
-                fill: var(--title-color);
-            }
-        }
-    }
-
+}
     .moreNews {
         width: 100%;
         display: flex;
@@ -99,23 +60,9 @@
         }
 
     }
-}
 
 
-.swiper {
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+.keen-slider {
     max-width: 95vw;
-
-    @media (max-width: 768px) {
-        padding: 0;
-    }
-}
-
-.swiper__slide {
-    height: auto;
+    margin: 0 auto;
 }

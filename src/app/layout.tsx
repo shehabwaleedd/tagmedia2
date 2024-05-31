@@ -1,9 +1,11 @@
 import "./globals.css";
 import Navbar from "@/components/navbar";
-import FooterF from "@/components/footer";
-import WhatsappIcon from "@/components/whatsappIcon";
+import dynamic from "next/dynamic";
+// import WhatsappIcon from "@/components/whatsappIcon";
 import { AuthProvider } from "@/context/AuthContext";
 import { Toaster } from "sonner";
+const FooterF = dynamic(() => import('@/components/footer'), { ssr: false });
+const WhatsappIcon = dynamic(() => import('@/components/whatsappIcon'), { ssr: false });
 
 type Metadata = {
   title: string;

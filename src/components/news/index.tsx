@@ -1,6 +1,23 @@
 import { serverUseNews } from '@/lib/serverAllNews';
-import SwiperNews from '../swiperNews';
-import styles from './style.module.scss'
+import "@/components/news/newsHomePage.scss"
+import { NewsType } from '@/types/common';
+import NewsCard from '../card';
+import Slider from '../swiper';
+import Link from 'next/link';
+
+const content = (news: NewsType[]) => {
+
+    return (
+        <>
+                {news.map((news, index) => (
+                    <div key={index} className={`keen-slider__slide`}>
+                        <NewsCard news={news} />
+                    </div>
+                ))}
+        </>
+    )
+
+}
 export default async function NewsHomePage() {
 
     const news = await serverUseNews();
@@ -15,8 +32,14 @@ export default async function NewsHomePage() {
     
 
     return (
-        <section className={styles.newsHomePage}>
-            <SwiperNews news={spliceNews} />
+        <section className="newsHomePage">
+            <div className="newsHomePage__upper">
+                <h2>Our News</h2>
+            </div>
+            <Slider content={content(spliceNews)} />
+            <Link href="/news" aria-label="View More News" className="moreNews">
+                <span className="newsHomePage__btn">View More News</span>
+            </Link>
         </section>
     )
 }

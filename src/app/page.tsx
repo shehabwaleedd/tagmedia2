@@ -1,14 +1,16 @@
+import dynamic from "next/dynamic";
 import Landing from "@/components/landing";
-import ServicesHomePage from "@/components/serviceHome";
-import NewsHomePage from "@/components/news";
-import Integration from "@/components/integration"
-import Integration2 from "@/components/integration2"
-import OurTeam from "@/components/ourTeam";
-import ContactHomePage from "@/components/contact"
-import FooterUpper from "@/components/footerUpper"
-import Announcment from "@/animation/marquee/Marquee";
-import MarqueeContent from "@/components/MarqueeContent";
+import ServicesHomePage from "@/components/serviceHome"
 import { serverDynamicFetch } from '@/lib/serverDynamicFetch'
+import MarqueeContent from "@/components/MarqueeContent";
+const NewsHomePage = dynamic(() => import('@/components/news'), { ssr: false });
+const Announcment = dynamic(() => import('@/animation/marquee/Marquee'), { ssr: false });
+const OurTeam = dynamic(() => import('@/components/ourTeam'), { ssr: false });
+const Integration = dynamic(() => import('@/components/integration'), { ssr: false });
+const Integration2 = dynamic(() => import('@/components/integration2'), { ssr: false });
+const FooterUpper = dynamic(() => import('@/components/footerUpper'), { ssr: false });
+import ContactHomePage from "@/components/contact"
+
 import styles from "./page.module.scss"
 
 export default async function Home() {
