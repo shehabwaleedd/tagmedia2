@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { useKeenSlider } from "keen-slider/react"
-import "@/components/news/newsHomePage.scss"
+import "@/components/news/NewsHomePage.scss"
 import "keen-slider/keen-slider.min.css"
 
 const Slider = ({ content }: { content: JSX.Element }) => {
