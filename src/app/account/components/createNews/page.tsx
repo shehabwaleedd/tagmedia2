@@ -10,6 +10,7 @@ import CustomField from './components/CustomField';
 import ImageUploader from './components/ImageUploader';
 import ImagesUploader from './components/ImagesUploader';
 import ReactQuillField from './components/ReactQuillField';
+import { toast } from 'sonner';
 
 const initialValues: FormValues = {
     title: '',
@@ -74,7 +75,7 @@ const CreateNews = () => {
 
             if (blogResponse.data.message === "Success") {
                 const blogId = blogResponse.data.data._id;
-                console.log("Blog created successfully, ID:", blogId);
+                toast.success("Post created successfully");
 
                 // Triggering section updates
                 const sectionPromises = values.sections.map(async (section: any, index: number) => {

@@ -15,6 +15,7 @@
         letter-spacing: 0.1rem;
         text-transform: capitalize;
         text-align: left;
+        color: var(--background-color)
     }
 
     &__container {
@@ -33,7 +34,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 1rem;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--background-color);
             border-radius: 2rem;
             cursor: pointer;
 
@@ -65,13 +66,13 @@
                 padding: 0.5rem;
                 border-radius: 2rem;
                 background-color: var(--background-color);
-                color: var(--title-color);
+                color: var(--background-color);
                 font-size: 1rem;
                 cursor: pointer;
                 transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 
                 button {
-                    background-color: var(--title-color);
+                    background-color: var(--background-color);
                     color: var(--background-color);
                     padding: 0.5rem;
                     border-radius: 2rem;
@@ -96,7 +97,7 @@
             font-size: var(--big-font-size);
             letter-spacing: 0.1rem;
             text-transform: capitalize;
-            color: var(--title-color);
+            color: var(--background-color);
 
             @media (max-width: 456px) {
                 top: 0;
@@ -124,7 +125,7 @@
 .title {
     font-family: var(--title-font);
     font-size: 1.2rem;
-    color: var(--title-color);
+    color: var(--background-color);
     font-display: swap;
     text-transform: uppercase;
     letter-spacing: -0.02rem;
@@ -156,11 +157,11 @@
     width: 100%;
     align-items: center;
     padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--background-color);
 
     button {
-        background-color: var(--accent-color);
-        color: var(--second-accent-color);
+        background-color: var(--second-accent-color);
+        color: var(--accent-color);
         padding: 0.5rem 1rem;
         border-radius: 2rem;
         cursor: pointer;

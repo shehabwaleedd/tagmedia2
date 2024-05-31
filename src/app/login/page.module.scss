@@ -7,7 +7,7 @@
     min-height: 100vh;
     height: 100%;
     gap: 2rem;
-    background-color: var(--background-color);
+    background-color: var(--accent-color);
     position: relative;
     padding-top: 15vh;
 
@@ -37,7 +37,7 @@
         background-color: var(--accent-color);
         box-shadow: 0 4px 30px rgba(96, 77, 58, 0.1);
         backdrop-filter: blur(5px);
-        border: 1px solid #c1c1c19b;
+        border: 1px solid var(--second-accent-color);
         -webkit-backdrop-filter: blur(5px);
         border-radius: 2rem;
         padding: 1rem;
@@ -72,7 +72,7 @@
                 border: 2px solid var(--title-color);
                 border-radius: 2rem;
                 font-size: 1.5rem;
-                background-color: var(--background-color);
+                background-color: var(--second-accent-color);
                 color: var(--title-color);
                 cursor: pointer;
                 transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);

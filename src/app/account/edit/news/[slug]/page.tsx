@@ -15,6 +15,8 @@ import CustomField from '@/app/account/components/createNews/components/CustomFi
 import ReactQuillField from '@/app/account/components/createNews/components/ReactQuillField';
 import * as Yup from 'yup';
 import Link from 'next/link';
+import { toast } from 'sonner';
+
 
 type SectionType = {
     title: string;
@@ -138,7 +140,6 @@ const EditNews = () => {
             setMainImgPreview(news?.mainImg.url);
             setImagePreviews(news?.images.map(img => img.url));
         }
-        console.log(sections, "sections")
     }, [news]);
 
     const handleSubmit = async (values: any, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
@@ -184,36 +185,32 @@ const EditNews = () => {
                     if (section.image instanceof File) {
                         sectionFormData.append('image', section.image);
                     }
-                    
+
                     return section._id ? axios.patch(`${process.env.NEXT_PUBLIC_BASE_URL}/section/specificSection/${section._id}`, sectionFormData, {
                         headers: {
                             token,
                             'Content-Type': 'multipart/form-data'
                         }
-                    }) 
-                    : axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/section/${news?._id}`, sectionFormData, {
-                        headers: {
-                            token,
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    });
+                    })
+                        : axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/section/${news?._id}`, sectionFormData, {
+                            headers: {
+                                token,
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        });
                 });
 
-                // console log the promises
-                console.log(promises, "promises")
-    
                 await Promise.all(promises);
                 setSuccess(true);
-                alert('Update successful');
-                console.log("All updates successful");
+                toast.success('Update successful');
             } else {
-                setError(blogUpdateResponse.data.err || 'Failed to update news')
+                toast.error(blogUpdateResponse.data.err || 'Failed to update news')
             }
         } catch (err: any) {
             if (err.response && err.blogUpdateResponse.data && err.blogUpdateResponse.data.err) {
-                setError(err.response.data.err);
+                toast.error(err.response.data.err);
             } else {
-                setError('Failed to update news');
+                toast.error('Failed to update news');
             }
         } finally {
             setLoading(false);
@@ -226,7 +223,6 @@ const EditNews = () => {
             <Link href="/account">
                 Back to Account
             </Link>
-            <h1>Edit News</h1>
             <Formik
                 initialValues={initialValues}
                 onSubmit={handleSubmit}
@@ -234,6 +230,9 @@ const EditNews = () => {
                 enableReinitialize>
                 {({ values, setFieldValue }) => (
                     <section className={checkboxStyles.createTour__container}>
+                        <Link href="/account">
+                            Back to Account
+                        </Link>
                         <Form className={checkboxStyles.createTour__container_content}>
                             <div className={styles.group}>
                                 <CustomField name="title" label='title' fieldType="input" />
@@ -290,16 +289,20 @@ const EditNews = () => {
 
                             <CheckboxGroupFieldArray name='seoKeywords' options={keywordOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.seoKeywords ?? []} />
                             <CheckboxGroupFieldArray name="tags" options={categoryOptions.map((cat) => ({ value: cat.value, label: cat.label }))} setFieldValue={setFieldValue} values={values.tags} />
-                            <input type="file" onChange={handleMainImageChange} accept="image/*" />
-                            {mainImgPreview && (
-                                <Image src={mainImgPreview} alt="Main Image" width={250} height={220} />
-                            )}
-                            <input type="file" multiple onChange={handleImagesChange} accept="image/*" />
-                            {imagePreviews && <div className={common.wrap}>
-                                {imagePreviews.map((preview, index) => (
-                                    <Image key={index} src={preview} alt={`Image ${index}`} width={250} height={220} />
-                                ))}
-                            </div>}
+                            <div className={styles.checkboxField}>
+                                <label htmlFor="mainImg">Main Image</label>
+                                <input type="file" onChange={handleMainImageChange} accept="image/*" />
+                                {mainImgPreview && (
+                                    <Image src={mainImgPreview} alt="Main Image" width={250} height={220} />
+                                )}
+                                <label htmlFor="images">Images</label>
+                                <input type="file" multiple onChange={handleImagesChange} accept="image/*" />
+                                {imagePreviews && <div className={common.wrap}>
+                                    {imagePreviews.map((preview, index) => (
+                                        <Image key={index} src={preview} alt={`Image ${index}`} width={250} height={220} />
+                                    ))}
+                                </div>}
+                            </div>
 
                             {loading && <p>Loading...</p>}
                             {error && error.split(',').map((err, index) => (

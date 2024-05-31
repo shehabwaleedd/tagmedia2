@@ -1,37 +1,47 @@
 'use client'
-import React, { useState, useEffect } from 'react'
-import { useAllNews } from '@/lib/useAllNews'
-import styles from "../../dashboardNews/style.module.scss"
-import DashboardNews from '@/components/dashboardNews'
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useAllNews } from '@/lib/useAllNews';
+import styles from '../../dashboardNews/style.module.scss';
+import DashboardNews from '@/components/dashboardNews';
+import { NewsType } from '@/types/common';
 
-const AllTours = () => {
-    const [currentPage, setCurrentPage] = useState(1);
+const AllTours: React.FC = () => {
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const { news, loading, totalPages } = useAllNews(currentPage);
+    const [allNews, setAllNews] = useState<NewsType[]>([]);
+    const [hasMore, setHasMore] = useState<boolean>(true);
 
     useEffect(() => {
-        console.log(totalPages, "totalPages")
-    }, [totalPages])
+        if (news) {
+            setAllNews((prevNews) => [...prevNews, ...news]);
+        }
+    }, [news]);
 
+    useEffect(() => {
+        if (currentPage >= totalPages) {
+            setHasMore(false);
+        }
+    }, [currentPage, totalPages]);
 
-    const handleNextPage = () => {
-        setCurrentPage(currentPage + 1);
-    };
-
-    const handlePreviousPage = () => {
-        setCurrentPage(currentPage - 1);
-    };
-
+    const observer = useRef<IntersectionObserver | null>(null);
+    const lastNewsElementRef = useCallback((node: Element | null) => {
+        if (loading || !hasMore) return;
+        if (observer.current) observer.current.disconnect();
+        observer.current = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && hasMore) {
+                setCurrentPage((prevPage) => prevPage + 1);
+            }
+        });
+        if (node) observer.current.observe(node);
+    }, [loading, hasMore]);
 
     return (
         <section>
-            <DashboardNews news={news ?? []} title="All News" loading={loading} />
-            <div className={styles.pagination}>
-                <button onClick={handlePreviousPage} disabled={currentPage <= 1}>Previous</button>
-                <span>Page {currentPage}</span>
-                <button onClick={handleNextPage} disabled={currentPage >= totalPages}>Next</button>
-            </div>
+            <DashboardNews news={allNews} title="All News" loading={loading} />
+            {loading && <div>Loading...</div>}
+            <div ref={lastNewsElementRef}></div>
         </section>
-    )
-}
+    );
+};
 
-export default AllTours
+export default AllTours;

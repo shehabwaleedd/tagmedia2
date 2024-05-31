@@ -48,7 +48,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 export default async function NewsDetails({ params }: { params: { slug: string } }) {
     const query = `blog/${decodeURIComponent(params.slug)}`;
     const newsDetails = await serverDynamicFetch(query);
-    console.log(newsDetails, "data", query, "qiuery")
     if (!newsDetails) {
         return null;
     }

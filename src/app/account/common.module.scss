@@ -1,11 +1,11 @@
 .submitButton {
     width: 100%;
     padding: 0.5rem;
-    border: 2px solid var(--title-color);
+    border: 2px solid var(--background-color);
     border-radius: 2rem;
     font-size: 1.5rem;
-    background-color: var(--title-color);
-    color: var(--background-color);
+    background-color: var(--second-accent-color);
+    color: var(--accent-color);
     cursor: pointer;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     margin-top: 3vh;
@@ -34,10 +34,10 @@
         width: 100%;
         padding: 10px 0rem;
         border: none;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--background-color);
         border-radius: 0;
         outline: none;
-        color: var(--title-color);
+        color: var(--background-color);
         background-color: transparent;
         cursor: pointer;
         transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -47,29 +47,29 @@
         }
 
         &::placeholder {
-            color: var(--title-color);
+            color: var(--background-color);
         }
 
         &::-moz-placeholder {
             /* Firefox 19+ */
-            color: var(--title-color);
+            color: var(--background-color);
             opacity: 1;
         }
 
         &:hover {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            border-bottom: 1px solid var(--title-color);
+            border-bottom: 1px solid var(--background-color);
         }
 
         &:focus {
-            border-bottom: 1px solid var(--title-color);
+            border-bottom: 1px solid var(--second-accent-color);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
     }
 
     label {
         font-size: 1.5rem;
-        color: var(--title-color);
+        color: var(--background-color);
         font-family: var(--title-font);
         text-transform: capitalize;
 
@@ -83,10 +83,10 @@
         width: 100%;
         padding: 10px 0rem;
         border: none;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--background-color);
         border-radius: 0;
         outline: none;
-        color: var(--title-color);
+        color: var(--background-color);
         background-color: transparent;
         cursor: pointer;
         transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -96,22 +96,22 @@
         }
 
         &::placeholder {
-            color: var(--title-color);
+            color: var(--background-color);
         }
 
         &::-moz-placeholder {
             /* Firefox 19+ */
-            color: var(--title-color);
+            color: var(--background-color);
             opacity: 1;
         }
 
         &:hover {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            border-bottom: 1px solid var(--title-color);
+            border-bottom: 1px solid var(--background-color);
         }
 
         &:focus {
-            border-bottom: 1px solid var(--title-color);
+            border-bottom: 1px solid var(--second-accent-color);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
     }
@@ -121,10 +121,10 @@
         width: 100%;
         padding: 10px 0rem;
         border: none;
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--background-color);
         border-radius: 0;
         outline: none;
-        color: var(--title-color);
+        color: var(--background-color);
         background-color: transparent;
         cursor: pointer;
         transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -134,22 +134,22 @@
         }
 
         &::placeholder {
-            color: var(--title-color);
+            color: var(--background-color);
         }
 
         &::-moz-placeholder {
             /* Firefox 19+ */
-            color: var(--title-color);
+            color: var(--background-color);
             opacity: 1;
         }
 
         &:hover {
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            border-bottom: 1px solid var(--title-color);
+            border-bottom: 1px solid var(--background-color);
         }
 
         &:focus {
-            border-bottom: 1px solid var(--title-color);
+            border-bottom: 1px solid var(--second-accent-color);
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -173,7 +173,7 @@
 
     label {
         font-size: 1rem;
-        color: var(--title-color);
+        color: var(--background-color);
         font-family: var(--title-font);
         text-transform: capitalize;
 
@@ -209,7 +209,7 @@
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--background-color);
     border-radius: 5px;
     color: #155724;
     background-color: #d4edda;
@@ -222,7 +222,7 @@
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--background-color);
     border-radius: 5px;
     color: #721c24;
     background-color: #f8d7da;
@@ -230,11 +230,11 @@
 
 .selected {
     transition: var(--animation-primary);
-    background-color: var(--title-color);
+    background-color: var(--second-accent-color);
     border-radius: 1rem;
 
     label {
-        color: var(--background-color);
+        color: var(--accent-color);
     }
 }
 
