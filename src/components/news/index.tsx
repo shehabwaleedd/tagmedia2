@@ -1,5 +1,5 @@
 import { serverUseNews } from '@/lib/serverAllNews';
-import "@/components/news/newsHomePage.scss"
+import "@/components/news/NewsHomePage.scss"
 import { NewsType } from '@/types/common';
 import NewsCard from '../card';
 import Slider from '../swiper';
