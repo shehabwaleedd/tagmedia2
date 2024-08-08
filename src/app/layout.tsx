@@ -1,8 +1,6 @@
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import dynamic from "next/dynamic";
-// import WhatsappIcon from "@/components/whatsappIcon";
-import { AuthProvider } from "@/context/AuthContext";
 import { Toaster } from "sonner";
 const FooterF = dynamic(() => import('@/components/footer'), { ssr: false });
 const WhatsappIcon = dynamic(() => import('@/components/whatsappIcon'), { ssr: false });
@@ -102,12 +100,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Toaster />
-        <AuthProvider>
           <Navbar />
           {children}
           <WhatsappIcon />
           <FooterF />
-        </AuthProvider>
       </body>
     </html>
   );

@@ -16,6 +16,7 @@ import styles from "./page.module.scss"
 export default async function Home() {
   const defaultPartners = await serverDynamicFetch('partner');
   const defaultPortfolio = await serverDynamicFetch('portfolio');
+  const integration = await serverDynamicFetch('integration');
 
   return (
     <main className={styles.main}>
@@ -26,7 +27,7 @@ export default async function Home() {
       <Integration />
       <Announcment content={MarqueeContent(defaultPortfolio)} direction={"right"} title="Our Portfolio" />
       <OurTeam />
-      <Integration2 />
+      <Integration2 data={integration}/>
       <ContactHomePage />
       <FooterUpper />
     </main>

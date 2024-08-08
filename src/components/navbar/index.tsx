@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import Nav from "./nav";
 import { AnimatePresence, motion, useAnimation } from 'framer-motion';
-import { useAuth } from '@/context/AuthContext';
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
 type RouteDestinationMap = {
@@ -17,7 +16,6 @@ const Navbar = () => {
     const pathname = usePathname();
     const [destination, setDestination] = useState<string>('');
     const [menuOpened, setMenuOpened] = useState<boolean>(false);
-    const { isLoggedIn } = useAuth();
     const controls = useAnimation();
 
     const toggleMenu = () => {
@@ -45,9 +43,6 @@ const Navbar = () => {
         { href: "/contact", label: "Contact" },
     ];
 
-    if (isLoggedIn) {
-        links.push({ href: "/account", label: "Account" });
-    }
 
     useEffect(() => {
         setMenuOpened(false);

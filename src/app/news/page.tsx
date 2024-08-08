@@ -1,8 +1,9 @@
 import React from 'react'
 import { serverUseNews } from '@/lib/serverAllNews';
-import Image from 'next/image'
 import styles from "./page.module.scss"
-import NewsCards from './components/NewsCards';
+import { NewsType } from '@/types/common'
+import NewsCard from '@/components/card';
+import UpperDivider from './components/TopDivider';
 
 export async function generateMetadata() {
     return {
@@ -24,7 +25,7 @@ export async function generateMetadata() {
             images: "/assets/covers/news_cover.webp",
             url: "https://tagmedia.me/news",
         }
-        
+
     }
 }
 
@@ -36,16 +37,15 @@ export default async function News() {
 
     return (
         <main className={styles.news}>
-            <section className={styles.news__upper}>
-                <Image src="/assets/covers/news_cover.webp" alt="news" width={1920} height={1080} />
-                <div className={styles.news__upper_content}>
-                    <div>
-                        <h1>Latest News</h1>
+            <UpperDivider main="News" />
+
+            <section className={styles.news__container}>
+                {data.map((news: NewsType, index: number) => (
+                    <div key={index} className={styles.news__container_card}>
+                        <NewsCard news={news} />
                     </div>
-                    <div className={styles.divider}></div>
-                </div>
+                ))}
             </section>
-            <NewsCards data={data} />
         </main>
     )
 }
